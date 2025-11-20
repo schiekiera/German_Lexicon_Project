@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lexical Decision Task</title>
+  <script src="https://unpkg.com/jspsych@8.2.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-call-function@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-external-html@2.1.0"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="browserCheck.js"></script>
+  <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css">
+  <script src="stimuli/practice_trials.js"></script>
+  <script src="stimuli/stimulus_list.js"></script>
+
+  <style>
+    /* --- General body & JSpsych display --- */
+    body {
+      font-family: "Courier New", Courier, monospace !important;
+    }
+
+    .jspsych-display-element {
+      display: flex;
+      flex-direction: column;
+      /* stack content vertically */
+      justify-content: flex-start;
+      /* align at top of screen */
+      align-items: center;
+      /* center horizontally */
+      height: 100vh;
+      font-size: 24px;
+      padding-top: 20px;
+      /* optional small gap from top */
+      box-sizing: border-box;
+    }
+
+    .jspsych-content {
+      /*style for html form*/
+      font-size: 24 px;
+      max-width: 800px;
+    }
+
+    /* --- Fixation cue container --- */
+    .fixation-cue {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* --- Stimulus word --- */
+    .stimulus-text {
+      font-size: 32px;
+      text-align: center;
+    }
+
+    /* --- Crosshair bars --- */
+    .cue {
+      position: absolute;
+      background-color: black;
+    }
+
+    /* Horizontal bars: left and right */
+    .cue-left,
+    .cue-right {
+      height: 1px;
+      /* thickness */
+      width: 20px;
+      /* length */
+      top: 50%;
+      /* vertical center */
+      transform: translateY(-50%);
+    }
+
+    .cue-left {
+      right: 100%;
+      /* extend left */
+      margin-right: 8px;
+      /* gap between word and bar */
+    }
+
+    .cue-right {
+      left: 100%;
+      /* extend right */
+      margin-left: 8px;
+    }
+
+    /* Vertical bars: top and bottom */
+    .cue-top,
+    .cue-bottom {
+      width: 1px;
+      /* thickness */
+      height: 20px;
+      /* length */
+      left: 50%;
+      /* horizontal center */
+      margin-right: 20px;
+      /* gap between word and bar */
+      transform: translateX(-50%);
+    }
+
+    .cue-top {
+      bottom: 100%;
+      /* extend up */
+      margin-bottom: 20px;
+    }
+
+    .cue-bottom {
+      top: 100%;
+      /* extend down */
+      margin-top: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="loading-message" style="text-align:center; font-size:24px; padding-top:100px;">
+    Das Experiment lädt, bitte warten...
+  </div>
+</body>
+<script>
+
+  /* ----------------------- 0) BOOT CHECK --------------------------------- */
+  // Detect mobile devices and block the experiment
+  if (!deviceBrowserCheck()) {
+    throw new Error("Dieses Experiment kann nur auf einem Desktop- oder Laptop-Computer durchgeführt werden.");
+  } else {
+    // Variables `practice_trials` and `stimulus_list` are already loaded by JS files
+    startExperiment(); // directly call the function
+  }
+
+  /* ----------------------- 1) MAIN ENTRY -------------------------------- */
+  function startExperiment() {
+    const jsPsych = initJsPsych({});
+
+    /* 1.1 URL params and checks */
+    const urlParams = new URLSearchParams(window.location.search);
+    const uniParam = urlParams.get("uni");   // <-- get the uni parameter
+    const sonaParam = urlParams.get("sona");  // <-- get the sona parameter
+
+    // Stop the experiment if no uni parameter is provided
+    if (!uniParam) {
+      document.body.innerHTML = `
+    <div style="text-align:center; font-size: 20px; padding-top: 100px;">
+      <p><b>Fehler:</b> Kein Universitätsparameter in der URL gefunden.</p>
+      <p>Bitte öffnen Sie den Link, der speziell für Ihre Universität bestimmt ist.</p>
+    </div>`;
+      throw new Error("Missing uni parameter in URL");
+    }
+
+    /* ----------------------- 2) ID MANAGEMENT ---------------------------- */
+    ID = getID("ID_management/manageID_test.php"); //change to manageID.php for the actual experiment 
+
+    /* ----------------------- 3) STIMULUS PREP ---------------------------- */
+    // Add itemcount to each stimulus
+    stimulus_list.forEach((stim, idx) => {
+      stim.itemcount = idx + 1;
+    });
+
+    // Calculate which slice of the full stimulus list a given participant should receive, based on their participant ID
+    const items_per_participant = 20; //change to 1600 for the actual experiment
+    const start_index = (ID - 1) * items_per_participant;
+    const end_index = start_index + items_per_participant;
+
+    // Debug 
+    if (end_index > stimulus_list.length) {
+      alert("Nicht genug Stimuli für diese Teilnehmernummer.");
+    }
+
+    // Step 1: Slice the assigned items for this participant
+    const participant_stimuli = stimulus_list.slice(start_index, end_index);
+
+    // Step 2: Shuffle with constraints (e.g., max 5 of the same 'type' in a row)
+    const randomized_stimuli = shuffleWithMaxConsecutive(participant_stimuli, 'type', 5);
+
+    // Step 3: Add itemcount field like [1, 2, ...]
+    randomized_stimuli.forEach((item, index) => {
+      item.itemcount = index + 1;
+    });
+
+    // Debug log
+    console.log(`Participant ID ${ID}: Items ${start_index} to ${end_index - 1}`);
+    console.log(randomized_stimuli); // shows you the final stimuli with itemcount
+
+
+
+    /* ----------------------- 4) DATA SAVE HELPERS ----------------------- */
+    // Generate a unique subject ID
+    const subject_id = Math.floor(Math.random() * 1000000);
+
+    function saveData(name, data) {
+      const folderName = uniParam;
+
+      return fetch('save_data.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          folder: folderName,
+          filename: name,
+          filedata: data
+        })
+      })
+        .then(response => response.text())
+        .then(text => {
+          console.log("SERVER RESPONSE:", text);
+        })
+        .catch(err => {
+          console.error("ERROR saving data:", err);
+        });
+    }
+
+    let block_counter = 1;
+
+    // Create `save_data_block` to save only the *most recent block* of main trials every 100 items
+    function create_data_saving_block(block_size) {
+      return {
+        type: jsPsychCallFunction,
+        func: () => {
+          const recent_block = jsPsych.data.get().filter({ task: 'main' }).last(block_size);
+
+          // Add subject ID to the block data manually
+          recent_block.addToAll({ subject_id: subject_id });
+
+          const csvData = recent_block.csv();
+          const now = new Date();
+          const timestamp = now.toISOString().replace(/[:.]/g, '-'); // safe filename format
+          const filename = `glp_${uniParam}_p${subject_id}_block${block_counter}_${timestamp}.csv`;
+
+
+          saveData(filename, csvData);
+          block_counter++;
+        }
+      };
+    }
+
+    /* ----------------------- 5) SHUFFLE UTILITY ------------------------- */
+    // Function to shuffle an array with a constraint:
+    // no more than maxConsecutive items of the same type (specified by constraintField) appear consecutively
+    function shuffleWithMaxConsecutive(array, constraintField, maxConsecutive) {
+
+      // Helper function to check if the array violates the max consecutive constraint
+      function violatesConstraint(arr) {
+        let count = 1; // count consecutive items of the same type
+        for (let i = 1; i < arr.length; i++) {
+          // If current item's type equals previous item's type, increment count
+          if (arr[i][constraintField] === arr[i - 1][constraintField]) {
+            count++;
+            // If count exceeds max allowed consecutive items, return true (violation)
+            if (count > maxConsecutive) return true;
+          } else {
+            // Reset count if type changes
+            count = 1;
+          }
+        }
+        // If loop finishes without violation, return false
+        return false;
+      }
+
+      let attempts = 0; // counter for attempts to shuffle
+      let shuffled;     // will hold shuffled array
+
+      do {
+        // Shuffle a copy of the array using jsPsych randomization
+        shuffled = jsPsych.randomization.shuffle([...array]);
+
+        attempts++;
+        // Safety break to avoid infinite loops
+        if (attempts > 100) {
+          console.warn("Could not fully satisfy max_consecutive constraint after many attempts");
+          break;
+        }
+      } while (violatesConstraint(shuffled)); // Repeat while constraint violated
+
+      // Return the shuffled array that satisfies the constraint
+      return shuffled;
+    }
+
+    // Shuffle practice_trials with max 5 consecutive items of the same 'type'
+    const constrained_practice_trials = shuffleWithMaxConsecutive(practice_trials, 'type', 5);
+    /*const randomized_stimuli = shuffleWithMaxConsecutive(stimulus_list, 'type', 5);*/
+
+
+    /* ----------------------- 6) KEY MAPPING ----------------------------- */
+    const key_map_options = [
+      { word: 'd', nonword: 'k' },
+      { word: 'k', nonword: 'd' }
+    ];
+    const assigned_keys = jsPsych.randomization.sampleWithoutReplacement(key_map_options, 1)[0];
+    const word_key = assigned_keys.word;
+    const nonword_key = assigned_keys.nonword;
+
+    // Add the key mapping to be saved with every trial's data
+    jsPsych.data.addProperties({
+      key_mapping: `word:${word_key}, nonword:${nonword_key}`
+    });
+
+    /* ----------------------- 7) TIMELINE INIT --------------------------- */
+    var timeline = [];
+
+    /* ----------------------- 8) SERVER ID FETCH ------------------------ */
+    function getID(url, datDir) {
+      let numID = 0;
+      $.ajax({
+        url: url,
+        type: 'POST',
+        async: false,
+        data: { dir: datDir },
+      }).done(function (data) {
+        numID = data;
+      });
+      return numID;
+    }
+
+    /* ----------------------- 9) HANDLE NO ID --------------------------- */
+    function isEmpty(str) {
+      return (!str || 0 === str.length);
+    }
+
+    if (isEmpty(ID)) {
+
+      var empty = {
+        type: 'html-button-response',
+        stimulus: '<p>Sorry, the data collection for this version of the study is already completed.</p>',
+        choices: ['OK']
+      };
+
+      timeline.push(empty);
+
+    } else {
+      /* ----------------------- 10) FULLSCREEN & CONSENT ----------------- */
+      // Enter fullscreen
+      var enter_fullscreen = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `
+        <div style="text-align: center;">
+            <p>Dieses Experiment kann <br>nur auf einem <b>Desktop- oder Laptop-Computer</b> durchgeführt werden und ist <br><b>mit Safari nicht kompatibel</b>.<br><br></p>
+          <i>Das Experiment wechselt in den Vollbildmodus.</i><br>
+                Drücken Sie dazu 'Starten'.</i>
+            </p>
+        </div>
+    `,
+        button_label: '<div style="text-align: center;">' + 'Starten'
+      };
+      // --- Informed consent ---
+      // Function to check if participant gave consent
+      var check_consent = function (elem) {
+        if (document.getElementById('consent_checkbox').checked) {
+          return true;
+        } else {
+          alert(
+            "Wenn Sie teilnehmen möchten, müssen Sie das Kästchen neben der Aussage „Ich erkläre hiermit meine freiwillige Einwilligung zur Teilnahme an der geplanten Untersuchung“ ankreuzen."
+          );
+          return false;
+        }
+      };
+
+      // --- Load combined mapping dynamically (no default consent allowed) ---
+      let consentFile;
+      let informed_consent;
+      let personal_code_question;
+
+      // Fetch combined mapping JSON
+      fetch("consent_forms/combined_mapping.json")
+        .then(response => {
+          if (!response.ok) throw new Error("Failed to load combined mapping file.");
+          return response.json();
+        })
+        .then(mapping => {
+          const uniData = mapping[uniParam];
+          if (!uniData || !uniData["0a_html_consent_form_location"]) {
+            document.body.innerHTML = `
+      <div style="text-align:center; font-size: 20px; padding-top: 100px;">
+        <p><b>Fehler:</b> Für diese Universität wurde keine Einverständniserklärung gefunden.</p>
+        <p>Bitte überprüfen Sie den Link oder kontaktieren Sie die Studienleitung.</p>
+      </div>`;
+            throw new Error("Keine Einverständniserklärung für diese Universität gefunden.");
+          }
+          // Hide loading message
+          const loadingMsg = document.getElementById('loading-message');
+          if (loadingMsg) loadingMsg.style.display = 'none';
+
+          // Define informed_consent and personal_code_question here
+          const informed_consent = {
+            type: jsPsychExternalHtml,
+            url: uniData["0a_html_consent_form_location"],
+            cont_btn: "start",
+            check_fn: check_consent
+          };
+
+          const personal_code_question = {
+            type: jsPsychSurveyText,
+            preamble: `
+    <div style="text-align: left; font-size: 20px; line-height: 1.5em;">
+      <p>Um Ihre Daten in diesem Experiment mit den Daten des weiteren Leseexperiments verknüpfen zu können, erstellen Sie bitte Ihren persönlichen Teilnahmecode.</p>
+      <p>Der Code setzt sich wie folgt zusammen (bitte nur Großbuchstaben verwenden):</p>
+      <ul>
+        <li>Die ersten zwei Buchstaben des Vornamens Ihrer Mutter</li>
+        <li>Die letzten zwei Buchstaben Ihrer Geburtsstadt</li>
+        <li>Den Zahlencode Ihres Geburtsmonats (zweistellig, z.&nbsp;B.&nbsp;01&nbsp;=&nbsp;Januar, 12&nbsp;=&nbsp;Dezember)</li>
+      </ul>
+      <p><b>Beispiel:</b> Vorname der Mutter: Kirsten, Geburtsstadt: Berlin, Geburtsmonat: Dezember (12) → Teilnahmecode: <b>KIIN12</b></p>
+    </div>
+  `,
+            questions: [
+              {
+                prompt: "Bitte geben Sie hier Ihren persönlichen Teilnahmecode ein:",
+                name: "personal_code",
+                required: true
+              }
+            ],
+            button_label: "Weiter",
+            on_finish: function (data) {
+              jsPsych.data.addProperties({
+                personal_code: data.response.personal_code
+              });
+            }
+          };
+
+          // --- Add university info to all data rows --- //
+          jsPsych.data.addProperties({
+            university: uniParam, // <-- add the uni column to the dat.csv
+            sonaID: sonaParam  // <-- add the sonaID column to the dat.csv
+          });
+
+          // Decide whether to include the personal code screen
+          const includePersonalCode = (uniData["0b_reading_fluency_test"] === "yes");
+
+          // Now build the timeline here
+
+          /* ----------------------- 11) INSTRUCTIONS ------------------------ */
+          // Define the instructions
+          var instructions = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              return `
+           <div class="jspsych-content" style="text-align: left;">
+              <p style="font-size: 1.5em;text-align: center;">
+                  Willkommen zum German Lexicon Project!
+              </p>
+              <p>
+                  Ihre Aufgabe ist es, zu entscheiden, ob diese Buchstabenreihe ein existierendes Wort im Deutschen ist oder nicht.
+              </p>
+              <ul>
+                  <li>Falls Sie glauben, dass es ein deutsches Wort ist, drücken Sie auf <strong>"${word_key.toUpperCase()}"</strong>, andernfalls auf <strong>"${nonword_key.toUpperCase()}"</strong>.</li>
+                  <li>Sollten Sie sich sicher sein, dass ein Wort existiert, aber seine Bedeutung nicht kennen, können Sie trotzdem mit "ja" (Taste <strong>"${word_key.toUpperCase()}"</strong>) antworten.</li>
+                  <li>Sind Sie sich aber unsicher, ob das Wort überhaupt im Deutschen existiert, sollten Sie mit "nein" (Taste <strong>"${nonword_key.toUpperCase()}"</strong>) antworten.</li>
+                  <li>Versuchen Sie, Fehler zu vermeiden, aber trotzdem schnell zu antworten.</li>
+              </ul>
+              <p>
+                  Auf der nächsten Seite werden Sie zunächst Instruktionen für eine Übungsdurchgang durchlaufen.
+                  <br><br>
+                  Drücken Sie eine <i>beliebige Taste</i>, um fortzufahren.
+              </p>
+          </div>
+        `;
+            },
+            post_trial_gap: 500,
+          };
+
+          /* ----------------------- 12) PRACTICE BLOCK ---------------------- */
+          var practice_instructions = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              return `
+            <div class="jspsych-content">
+                <p>Zuerst kommen einige Übungsdurchgänge, um Sie mit der Aufgabe vertraut zu machen.</p>
+                <p>Denken Sie daran: <strong>"${word_key.toUpperCase()}"</strong> für Wort, <strong>"${nonword_key.toUpperCase()}"</strong> für Nicht-Wort.</p>
+                <br><br>
+                <p>Drücken Sie eine <i>beliebige Taste</i>, um mit der Übung zu beginnen.</p>
+            </div>
+            `;
+            },
+            post_trial_gap: 500,
+          };
+          //timeline.push(practice_instructions);
+
+          var fixation_cue = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              const word = jsPsych.evaluateTimelineVariable('presented_word');
+
+              // Create a hidden temporary span to measure the word's true width
+              const tempSpan = document.createElement('span');
+              tempSpan.style.fontFamily = '"Courier New", Courier, monospace';
+              tempSpan.style.fontSize = '32px';
+              tempSpan.style.visibility = 'hidden';
+              tempSpan.textContent = word;
+              document.body.appendChild(tempSpan);
+
+              // Get actual width in pixels
+              const wordWidth = tempSpan.getBoundingClientRect().width;
+              document.body.removeChild(tempSpan);
+
+              // Add a small buffer (optional, e.g. 4px for anti-aliasing)
+              const adjustedWidth = wordWidth;
+
+              // Return the fixation cue box exactly matching the word width
+              return `
+      <div class="fixation-cue" style="width: ${adjustedWidth}px;">
+        <div class="cue cue-top"></div>
+        <div class="cue cue-bottom"></div>
+        <div class="cue cue-left"></div>
+        <div class="cue cue-right"></div>
+      </div>
+    `;
+            },
+            choices: "NO_KEYS",
+            trial_duration: 500
+          };
+
+          var practice_trial = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              const word = jsPsych.evaluateTimelineVariable('presented_word');
+              return `
+          <div class="stimulus-text">${word}</div>
+          </div>`;
+            },
+            choices: [word_key, nonword_key],
+            //trial_duration: 2500,
+            data: function () {
+              const word_type = jsPsych.evaluateTimelineVariable('type');
+              const correct_response = word_type === 'word' ? word_key : nonword_key;
+              return {
+                task: 'practice',
+                word: jsPsych.evaluateTimelineVariable('presented_word'),
+                correct_response: correct_response,
+                type: word_type
+              };
+            },
+            on_finish: function (data) {
+              data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+            }
+          };
+
+          var practice_feedback = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              const last_trial_correct = jsPsych.data.getLastTrialData().values()[0].correct;
+              return last_trial_correct ? '<p style="color: green;">Richtig!</p>' : '<p style="color: red;">Falsch!</p>';
+            },
+            choices: "NO_KEYS",
+            trial_duration: 500
+          };
+
+          var blank_screen = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '',
+            choices: "NO_KEYS",
+            trial_duration: 500,
+          };
+
+          var practice_procedure = {
+            timeline: [fixation_cue, practice_trial, practice_feedback, blank_screen],
+            timeline_variables: constrained_practice_trials,
+            randomize_order: false  // already shuffled above with constraints
+          };
+          //timeline.push(practice_procedure);
+
+          var end_practice = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              var practice_trials_data = jsPsych.data.get().filter({ task: 'practice' });
+              var correct_trials = practice_trials_data.filter({ correct: true });
+              var correct_count = correct_trials.count();
+              var total_count = practice_trials_data.count();
+              var practice_score = 0;
+              var rt_all = "–";
+
+              if (total_count > 0) {
+                practice_score = Math.round((correct_count / total_count) * 100);
+                rt_all = Math.round(practice_trials_data.select('rt').mean());
+              }
+
+              return `
+      <div class="jspsych-content">
+        <p>Die Übung ist nun beendet. Der Prozentsatz der richtigen Antworten betrug: <strong>${practice_score}%</strong>.</p>
+        <p>Ihre durchschnittliche Reaktionszeit war <b>${rt_all} ms</b>.</p><br>
+        <p><b>Das eigentliche Experiment beginnt jetzt.</b></p>
+        <p>Es wird keine Rückmeldung mehr zur Richtigkeit Ihrer Antworten geben.</p>
+        <p>Drücken Sie eine <i>beliebige Taste</i>, um zu beginnen.</p>
+      </div>`;
+            },
+            post_trial_gap: 500
+          };
+
+          //timeline.push(end_practice);
+
+          /* ----------------------- 13) MAIN EXPERIMENT --------------------- */
+          // Fixation cue trial
+          var fixation_cue_main = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              const word = jsPsych.evaluateTimelineVariable('presented_word');
+
+              // Create a hidden temporary span to measure the word's true width
+              const tempSpan = document.createElement('span');
+              tempSpan.style.fontFamily = '"Courier New", Courier, monospace';
+              tempSpan.style.fontSize = '32px';
+              tempSpan.style.visibility = 'hidden';
+              tempSpan.textContent = word;
+              document.body.appendChild(tempSpan);
+
+              // Get actual width in pixels
+              const wordWidth = tempSpan.getBoundingClientRect().width;
+              document.body.removeChild(tempSpan);
+
+              // Add a small buffer (optional, e.g. 4px for anti-aliasing)
+              const adjustedWidth = wordWidth;
+
+              // Return the fixation cue box exactly matching the word width
+              return `
+      <div class="fixation-cue" style="width: ${adjustedWidth}px;">
+        <div class="cue cue-top"></div>
+        <div class="cue cue-bottom"></div>
+        <div class="cue cue-left"></div>
+        <div class="cue cue-right"></div>
+      </div>
+    `;
+            },
+            choices: "NO_KEYS",
+            trial_duration: 500
+          };
+
+          // Main trial
+          var main_trial = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              const word = jsPsych.evaluateTimelineVariable('presented_word');
+              return `<div class="stimulus-text" id="stimulus-word" style="visibility: hidden;">${word}</div>`;
+            },
+            choices: [word_key, nonword_key],
+            trial_duration: null,
+            on_load: function () {
+              setTimeout(() => {
+                const stim = document.getElementById('stimulus-word');
+                if (stim) stim.style.visibility = 'visible';
+              }, 10);
+            },
+            data: function () {
+              const word_type = jsPsych.evaluateTimelineVariable('type');
+              const correct_response = word_type === 'word' ? word_key : nonword_key;
+              jsPsych.timelineVariable('log');
+              return {
+                task: 'main',
+                word: jsPsych.evaluateTimelineVariable('presented_word'),
+                correct_response: correct_response,
+                type: word_type,
+                log: jsPsych.evaluateTimelineVariable('log')
+              };
+            },
+            on_finish: function (data) {
+              data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+
+            }
+          };
+
+          // Blank screen
+          var blank_screen = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '',
+            choices: "NO_KEYS",
+            trial_duration: 500
+          };
+
+          // Feedback pause every 5 trials
+          function create_feedback_break(block_size, trial_num, total_trials) {
+            const progress = Math.round((trial_num / total_trials) * 100);
+            return {
+              type: jsPsychHtmlKeyboardResponse,
+              stimulus: function () {
+                const recent_trials = jsPsych.data.get().filter({ task: 'main' }).last(block_size);
+                const correct_trials = recent_trials.filter({ correct: true });
+                const total_count = recent_trials.count();
+                const correct_count = correct_trials.count();
+                const accuracy = total_count > 0 ? Math.round((correct_count / total_count) * 100) : 0;
+                const rt_all = total_count > 0 ? Math.round(recent_trials.select('rt').mean()) : "–";
+
+                return `
+        <div class="jspsych-content" style="text-align: left;">
+          <p>Kurze Pause. <br>Sie haben <b>${progress}%</b> des Experiments abgeschlossen.</p>
+          <p>Der Prozentsatz der richtigen Antworten im letzten Block: <b>${accuracy}%</b>.</p>
+          <p>Durchschnittliche Reaktionszeit im letzten Block: <b>${rt_all} ms</b>.</p><br><br>
+          <p><b>Bitte machen Sie mindestens 5 Sekunden Pause.</b></p>
+          <p id="continue-msg" style="visibility:hidden;"><b>Drücken Sie eine beliebige Taste, um fortzufahren.</b></p>
+        </div>`;
+              },
+              choices: "ALL_KEYS",
+              trial_duration: null,
+              response_ends_trial: true,
+              on_load: function () {
+                // hide key prompt for 5 seconds
+                setTimeout(() => {
+                  document.getElementById('continue-msg').style.visibility = 'visible';
+                }, 5000);
+              },
+            };
+          }
+
+
+          // Timeline array
+          var main_timeline = [];
+          const break_interval = 5; // update this if your block size is different -//change to 100 for the actualexperiment
+
+          for (let i = 0; i < randomized_stimuli.length; i++) {
+            // Add main trial block
+            main_timeline.push({
+              timeline: [fixation_cue_main, main_trial, blank_screen],
+              timeline_variables: [randomized_stimuli[i]]
+            });
+
+            const trial_num = i + 1;
+            const is_break_point = trial_num % break_interval === 0 || trial_num === randomized_stimuli.length;
+
+            if (is_break_point) {
+              // Add feedback pause
+              main_timeline.push(create_feedback_break(break_interval, trial_num, randomized_stimuli.length));
+
+              // Add data save call (saves *only* last block_size trials)
+              main_timeline.push(create_data_saving_block(break_interval));
+            }
+          }
+
+          // Final experiment wrapper
+          var main_experiment_with_breaks = {
+            timeline: main_timeline
+          };
+
+
+
+          /* ----------------------- 14) DEMOGRAPHICS --------------------- */
+          var questionnaire_intro = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              var break_interval = 5; // update this if your block size is different -//change to 100 for the actualexperiment
+              var main_data = jsPsych.data.get().filter({ task: 'main' }).last(break_interval);
+              var correct_trials = main_data.filter({ correct: true });
+              var total_trials = main_data.count();
+              var correct_count = correct_trials.count();
+              var accuracy = 0;
+              var rt_all = "–";
+
+              if (total_trials > 0) {
+                accuracy = Math.round((correct_count / total_trials) * 100);
+                rt_all = Math.round(main_data.select('rt').mean());
+              }
+
+              return `
+      <div class="jspsych-content" style="padding-top: 10px;">
+        <p>Der Hauptteil des Experiments ist abgeschlossen.</p><br>
+        <p><b>Bitte beantworten Sie nun einige Fragen zu Ihren biographischen Daten.</b></p>
+        <p>Drücken Sie eine <i>beliebige Taste</i>, um zu beginnen.</p>
+      </div>`;
+            },
+            post_trial_gap: 500
+          };
+          // timeline.push(questionnaire_intro);
+
+          var demographics = {
+            type: jsPsychSurveyMultiChoice,
+            data: { task: 'demographics' },
+            preamble: '<div style="font-size: 24px;"></div>',  // top space before questions
+            button_label: "Weiter",
+            questions: [
+              { prompt: "Geschlecht:", name: 'gender', options: ['männlich', 'weiblich', 'divers', 'keine Antwort'], required: true },
+              { prompt: "Höchster Bildungsabschluss:", name: 'education', options: ['Ohne Schulabschluss', 'Hauptschulabschluss', 'Mittlere Reife/Realschulabschluss', '(Fach-)hochschulreife (z. B. Abitur, Fachabitur)', 'Berufsausbildung', 'Hochschulabschluss (Bachelor, Master, Promotion)'], required: true },
+              { prompt: "Händigkeit:", name: 'handedness', options: ['Rechtshänder', 'Linkshänder', 'Beidhänder'], required: true },
+            ],
+          };
+
+          var country = {
+            type: jsPsychSurveyHtmlForm,
+            data: { task: 'demographics' },
+            button_label: "Weiter",
+            preamble: '<p style=padding-left: 50px;font-size: 24px; text-align: left;"> </p>',
+            html: `
+    <div style="text-align: left;padding-left: 50px;font-size: 24px;">
+
+      <p>Wie alt sind Sie?</p>
+      <input type="text" name="age" id="age_input" required style="width: 100%;"><br><br>
+
+     
+      <p>In welchem Land sind Sie aufgewachsen?</p>
+      <input type="text" name="origin_region" id="origin_input" required style="width: 100%;"><br><br>
+
+      <p>Falls Sie in der vorherigen Frage Deutschland, Österreich oder die Schweiz angegeben haben:
+         Wie lautet die Postleitzahl des Ortes, in dem Sie aufgewachsen sind?
+      <i>(Hinweis: fünfstellig für Deutschland, vierstellig für Österreich und die Schweiz)</i></p>
+      <input type="text" name="PLZ_origin_region" id="PLZ_origin_input" required style="width: 100%;"><br><br>
+
+      <p>In welchem Land nehmen nehmen Sie an dieser Studie teil?</p>
+      <input type="text" name="site" id="site_input" required style="width: 100%;"><br><br>
+
+      <p>Falls Sie in der vorherigen Frage Deutschland, Österreich oder die Schweiz angegeben haben:
+         Wie lautet die Postleitzahl des Ortes, an dem Sie an der Studie teilnehmen?</p>
+      <i>(Hinweis: fünfstellig für Deutschland, vierstellig für Österreich und die Schweiz)</i></p>
+      <input type="text" name="PLZ_site" id="PLZ_site_input" required style="width: 100%;"><br><br>
+
+
+
+    </div>
+  `
+          };
+
+          var dialect = {
+            type: jsPsychSurveyHtmlForm,
+            data: { task: 'demographics' },
+            button_label: "Weiter",
+            preamble: '<p style="font-size: 24px;padding-left: 50px; text-align: center;"><b>Einige Fragen zu Ihrem sprachlichen Hintergrund.</b></p>',
+            html: `
+    <div style="text-align: left;font-size: 24px;padding-left: 50px;">
+
+      <p>1. Haben Sie Deutsch als Muttersprache (vor dem 2. Lebensjahr) erworben?</p>
+      <label style="display: block;"><input type="radio" name="native_german" value="ja" required> Ja</label>
+      <label style="display: block;"><input type="radio" name="native_german" value="nein"> Nein</label><br>
+
+      <p>2. Haben Sie vor dem 2. Lebensjahr eine andere Sprache als Deutsch gelernt?</p>
+      <label style="display: block;"><input type="radio" name="other_lang_early" value="ja" required> Ja</label>
+      <label style="display: block;"><input type="radio" name="other_lang_early" value="nein"> Nein</label><br>
+
+      <p>3. Sind Sie mehrsprachig?</p>
+      <label style="display: block;"><input type="radio" name="multilingual" value="ja" required> Ja</label>
+      <label style="display: block;"><input type="radio" name="multilingual" value="nein"> Nein</label><br>
+
+      <p>4. Wenn ja, welche Sprachen sprechen Sie und wie würden Sie Ihre Kenntnisse auf einer Skala von 1 (Anfänger) bis 5 (fließend) bewerten?</p>
+      <textarea name="languages_proficiency" rows="4" cols="50" placeholder="z.B. Englisch (5), Französisch (2)" style="width: 100%;"></textarea><br><br>
+
+      <p>5. Welche ist Ihre vertrauteste Sprechweise?</p>
+      <label style="display: block;"><input type="radio" name="lang_variety" value="dialekt" required> Dialekt/Platt</label>
+      <label style="display: block;"><input type="radio" name="lang_variety" value="regional"> Regional gefärbte Alltagssprache</label>
+      <label style="display: block;"><input type="radio" name="lang_variety" value="hochdeutsch"> Hochdeutsch</label><br>
+
+    </div>
+  `
+          };
+
+          //save all demographics data to separate file
+          const save_questionnaire_data = {
+            type: jsPsychCallFunction,
+            func: () => {
+              const questionnaire_data = jsPsych.data.get().filter({ task: 'demographics' });
+              questionnaire_data.addToAll({ subject_id: subject_id });
+
+              const csvData = questionnaire_data.csv();
+              const now = new Date();
+              const timestamp = now.toISOString().replace(/[:.]/g, '-');
+              const filename = `glp_${uniParam}_p${subject_id}_block${block_counter}demo_${timestamp}.csv`;
+
+              saveData(filename, csvData);
+            }
+          };
+          ////timeline.push(save_data_block);
+
+          /* ----------------------- 15) ID MANAGEMENT CLEAN-UP --------------------- */
+          // Define the cleanup function
+          function cleanup(code) {
+            $.ajax({
+              type: 'post',
+              cache: false,
+              url: 'ID_management/cleanupID_test.php',//change to cleanupID.php for the actual experiment 
+              data: { ID: code }
+            });
+          }
+
+          // Define the jsPsych trial using jsPsychCallFunction
+          var cleanup_routine = {
+            type: jsPsychCallFunction,
+            func: () => {
+              cleanup(ID);
+            },
+            post_trial_gap: 200 // this replaces timing_post_trial
+          };
+
+
+          /* ----------------------- 16) DEBRIEFING SLIDE--------------------- */
+          var debriefing = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              const main = jsPsych.data.get().filter({ task: 'main' });
+
+              return `
+      <div class="jspsych-content" style="text-align:left;padding-left: 30px;">
+        <p style="font-size:1.4em; text-align:center;"><b>Debriefing</b></p>
+
+        <p><b>Ziel der Studie:</b> Wir untersuchen, wie schnell und genau deutsche Wörter
+        im Vergleich zu Nichtwörtern erkannt werden. Diese Entscheidungen geben Aufschluss
+        über die Struktur des mentalen Lexikons (Wortschatz im Langzeitgedächtnis).</p>
+
+        <p><b>Was wurde gemessen?</b> Tastenreaktionen (<i>${word_key.toUpperCase()}</i>=Wort,
+        <i>${nonword_key.toUpperCase()}</i>=Nicht-Wort), Reaktionszeiten (in Millisekunden)
+        und Antwortgenauigkeit.</p>
+
+        <p><b>Täuschung:</b> In dieser Studie wurde keine Täuschung eingesetzt.</p>
+
+        <br><p style="text-align:center;"><b>Drücken Sie eine beliebige Taste, um fortzufahren.</b></p>
+      </div>
+    `;
+            },
+            choices: "ALL_KEYS",
+            response_ends_trial: true,
+            post_trial_gap: 500
+          };
+
+
+          /* ----------------------- 17) THANK YOU AND REIMBURSMENT --------------------- */
+          // --- default completion text ---
+          let completionText = "<p>Bitte kontaktieren Sie die Studienleitung für weitere Informationen.</p>";
+
+          // --- load external mapping ---
+          fetch("consent_forms/combined_mapping.json")
+            .then(response => response.json())
+            .then(mapping => {
+              const uniData = mapping[uniParam] || mapping["default"];
+
+              // Reset to empty first, so we can append conditionally
+              completionText = "";
+
+              // Append texts based on flags
+              if (uniData["1b_individual_reimbursement"] === "yes") {
+                completionText += `<p>${uniData["1b_individual_reimbursement_text"]}</p>`;
+              }
+              if (uniData["2_individual_completion_sentence"] === "yes") {
+                completionText += `<p>${uniData["2_individual_completion_sentence_text"]}</p>`;
+              }
+
+              // If no individual texts were appended, use default
+              if (completionText === "") {
+                completionText = uniData["default_text"] || "<p>Bitte kontaktieren Sie die Studienleitung für weitere Informationen.</p>";
+              }
+            });
+
+          var thankYou = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+              var main_trials = jsPsych.data.get().filter({ task: 'main' });
+              var correct_trials = main_trials.filter({ correct: true });
+              var vocabulary_score = 0;
+              if (main_trials.count() > 0) {
+                vocabulary_score = Math.round((correct_trials.count() / main_trials.count()) * 100);
+              }
+              return `
+      <div class="jspsych-content">
+        <p>Vielen Dank für Ihre Teilnahme!</p>
+        <p>Ihre Daten wurden gespeichert.</p><br><br>
+        <div style="text-align: left; width: 105%;">
+      ${completionText}
+    </div>
+      </div>`;
+            }
+          };
+
+
+
+          /* ----------------------- 18) EXIT --------------------- */
+          var exit_fullscreen = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: false,
+            delay_after: 0
+          };
+          //timeline.push(exit_fullscreen)
+
+
+
+
+          /* ----------------------- 19) TIMELINE --------------------- */
+          const timeline = [];
+
+          //timeline.push(preload);
+          timeline.push(enter_fullscreen);
+          timeline.push(informed_consent);
+          if (includePersonalCode) timeline.push(personal_code_question);
+          timeline.push(instructions);
+          timeline.push(practice_instructions);
+          timeline.push(practice_procedure);
+          timeline.push(end_practice);
+          timeline.push(main_experiment_with_breaks);
+          timeline.push(questionnaire_intro);
+          timeline.push(demographics);
+          timeline.push(country);
+          timeline.push(dialect);
+          timeline.push(save_questionnaire_data);
+          timeline.push(cleanup_routine);
+          timeline.push(debriefing);
+          timeline.push(thankYou);
+          timeline.push(exit_fullscreen);
+
+          // Start the experiment
+          jsPsych.run(timeline);
+        })
+        .catch(error => {
+          console.error("Error loading consent mapping:", error);
+          document.body.innerHTML = `<p><b>Fehler beim Laden der Einverständniserklärung.</b><br>${error.message}</p>`;
+        });
+    }
+  };
+
+</script>
+
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lexical Decision Task</title>
+  <script src="https://unpkg.com/jspsych@8.2.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-call-function@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-external-html@2.1.0"></script>
+  <script src="practice_trials.js"></script>
+  <script src="stimulus_list.js"></script>
+  <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css">
+
+  <style>
+    body {
+      font-family: "Courier New", Courier, monospace !important;
+    }
+
+    .jspsych-display-element {
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: left;
+      height: 100vh;
+      font-size: 24px;
+    }
+
+    .fixation-cue {
+      position: relative;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cue {
+      position: absolute;
+      background-color: black;
+    }
+
+    .cue-top {
+      width: 1px;
+      height: 20px;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .cue-bottom {
+      width: 1px;
+      height: 20px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .cue-left {
+      width: 20px;
+      height: 1px;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .cue-right {
+      width: 20px;
+      height: 1px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .fixation-cue .stimulus-text {
+      font-size: 32px;
+    }
+
+    .jspsych-content {
+      font-size: 20 px;
+      max-width: 800px;
+    }
+  </style>
+</head>
+
+<body></body>
+<script>
+
+  // Detect mobile devices and block the experiment
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    document.body.innerHTML = `
+      <div class="jspsych-display-element">
+        <p>This experiment can only be completed on a desktop or laptop computer.</p>
+        <p>Please switch to a compatible device to proceed.</p>
+      </div>
+    `;
+  } else {
+
+    // --- INITIALIZE PSYCH ---
+    const jsPsych = initJsPsych({
+    });
+
+    // --- SUBJECT ID AND DATA SAVE FUNCTION --- //
+    // Generate a unique subject ID
+    const subject_id = Math.floor(Math.random() * 1000000);
+
+    function saveData(name, data) {
+      fetch('save_data.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          filename: name,
+          filedata: data
+        })
+      });
+    };
+
+    let block_counter = 1;
+
+    // Create `save_data_block` to save only the *most recent block* of main trials every 100 items
+    function create_data_saving_block(block_size) {
+      return {
+        type: jsPsychCallFunction,
+        func: () => {
+          const recent_block = jsPsych.data.get().filter({ task: 'main' }).last(block_size);
+
+          // Add subject ID to the block data manually
+          recent_block.addToAll({ subject_id: subject_id });
+
+          const csvData = recent_block.csv();
+          const now = new Date();
+          const timestamp = now.toISOString().replace(/[:.]/g, '-'); // safe filename format
+          const filename = `ger_lex_proj_p${subject_id}_block${block_counter}_${timestamp}.csv`;
+
+          saveData(filename, csvData);
+          block_counter++;
+        }
+      };
+    }
+
+
+
+    /*const save_data_block = {
+      type: jsPsychCallFunction,
+      func: () => {
+        const csvData = jsPsych.data.get().csv();
+        saveData(`association_${subject_id}_block${block_counter}.csv`, csvData);
+        block_counter++;  // increase for next save
+      }
+    };*/
+
+    /*var save_data_block = {
+      type: jsPsychCallFunction,
+      func: function () {
+        saveData("association_" + subject_id + ".csv", jsPsych.data.get().csv()); // assigns a name to each data file
+      },
+      timing_post_trial: 200,
+    };*/
+
+    // Function to post data to your server
+    /* function saveData(name, data) {
+       fetch('save_data.php', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/x-www-form-urlencoded',
+         },
+         body: new URLSearchParams({
+           filename: name,
+           filedata: data
+         })
+       });
+     };*/
+
+    // Function to shuffle an array with a constraint:
+    // no more than maxConsecutive items of the same type (specified by constraintField) appear consecutively
+    function shuffleWithMaxConsecutive(array, constraintField, maxConsecutive) {
+
+      // Helper function to check if the array violates the max consecutive constraint
+      function violatesConstraint(arr) {
+        let count = 1; // count consecutive items of the same type
+        for (let i = 1; i < arr.length; i++) {
+          // If current item's type equals previous item's type, increment count
+          if (arr[i][constraintField] === arr[i - 1][constraintField]) {
+            count++;
+            // If count exceeds max allowed consecutive items, return true (violation)
+            if (count > maxConsecutive) return true;
+          } else {
+            // Reset count if type changes
+            count = 1;
+          }
+        }
+        // If loop finishes without violation, return false
+        return false;
+      }
+
+      let attempts = 0; // counter for attempts to shuffle
+      let shuffled;     // will hold shuffled array
+
+      do {
+        // Shuffle a copy of the array using jsPsych randomization
+        shuffled = jsPsych.randomization.shuffle([...array]);
+
+        attempts++;
+        // Safety break to avoid infinite loops
+        if (attempts > 500) {
+          console.warn("Could not fully satisfy max_consecutive constraint after many attempts");
+          break;
+        }
+      } while (violatesConstraint(shuffled)); // Repeat while constraint violated
+
+      // Return the shuffled array that satisfies the constraint
+      return shuffled;
+    }
+
+    // Usage example: shuffle practice_trials with max 5 consecutive items of the same 'type'
+    const constrained_practice_trials = shuffleWithMaxConsecutive(practice_trials, 'type', 5);
+    const randomized_stimuli = shuffleWithMaxConsecutive(stimulus_list, 'type', 5);
+
+
+    //////////////////////////////////////////////////////////////////////
+    // --- SETUP DYNAMIC KEY MAPPING ---
+    //////////////////////////////////////////////////////////////////////
+    const key_map_options = [
+      { word: 'd', nonword: 'k' },
+      { word: 'k', nonword: 'd' }
+    ];
+    const assigned_keys = jsPsych.randomization.sampleWithoutReplacement(key_map_options, 1)[0];
+    const word_key = assigned_keys.word;
+    const nonword_key = assigned_keys.nonword;
+
+    // Add the key mapping to be saved with every trial's data
+    jsPsych.data.addProperties({
+      key_mapping: `word:${word_key}, nonword:${nonword_key}`
+    });
+    /////////////////////////////////////////////////////////////////////
+    // Initialize the timeline
+    ///////  ///////////////////////////////////////////////////////////
+    var timeline = [];
+
+    // Enter fullscreen
+    var enter_fullscreen = {
+      type: jsPsychFullscreen,
+      fullscreen_mode: true,
+      message: `
+        <div style="text-align: center;">
+            <p style="font-size: 1.5em;">
+                <i>Das Experiment wechselt in den Vollbildmodus.<br>
+                Drücken Sie dazu 'Starten'.</i>
+            </p>
+        </div>
+    `,
+      button_label: '<div style="text-align: center;">' + 'Starten'
+    };
+    // Informed consent 
+    // sample function that might be used to check if a participant has given
+    // consent to participate.
+    var check_consent = function (elem) {
+      if (document.getElementById('consent_checkbox').checked) {
+        return true;
+      }
+      else {
+        alert("Wenn Sie teilnehmen möchten, müssen Sie das Kästchen neben der Aussage „ Ich erkläre hiermit meine freiwillige Einwilligung zur Teilnahme an der geplanten Untersuchung“ ankreuzen.'");
+        return false;
+      }
+      return false;
+    };
+
+    // declare the block.
+    var informed_consent = {
+      type: jsPsychExternalHtml,
+      url: "informedconsent.html",
+      cont_btn: "start",
+      check_fn: check_consent
+    };
+
+    //timeline.push(enter_fullscreen);
+
+    // Define the instructions
+    var instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        return `
+           <div class="jspsych-content" style="text-align: left;">
+              <p style="font-size: 1.5em;text-align: center;">
+                  Willkommen zum German Lexicon Project!
+              </p>
+              <p>
+                  Ihre Aufgabe ist es, zu entscheiden, ob diese Buchstabenreihe ein existierendes deutsches Wort ist oder nicht.
+              </p>
+              <ul>
+                  <li>Falls Sie glauben, dass es ein deutsches Wort ist, drücken Sie auf <strong>"${word_key.toUpperCase()}"</strong>, andernfalls auf <strong>"${nonword_key.toUpperCase()}"</strong>.</li>
+                  <li>Sollten Sie sich sicher sein, dass ein Wort existiert, aber seine Bedeutung nicht kennen, können Sie trotzdem mit "ja" (Taste <strong>"${word_key.toUpperCase()}"</strong>) antworten.</li>
+                  <li>Sind Sie sich aber unsicher, ob das Wort überhaupt im Deutschen existiert, sollten Sie mit "nein" (Taste <strong>"${nonword_key.toUpperCase()}"</strong>) antworten.</li>
+                  <li>Versuchen Sie, Fehler zu vermeiden, aber trotzdem schnell zu antworten.</li>
+              </ul>
+              <p>
+                  Auf der nächsten Seite werden Sie zunächst Instruktionen für eine Übungsdurchgang durchlaufen.
+                  <br><br>
+                  Drücken Sie eine <i>beliebige Taste</i>, um fortzufahren.
+              </p>
+          </div>
+        `;
+      },
+      post_trial_gap: 500,
+    };
+    //timeline.push(instructions);
+
+    //////////////////////////////////////////////////////////////////////
+    // --- PRACTICE BLOCK ---
+    //////////////////////////////////////////////////////////////////////
+    var practice_instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        return `
+            <div class="jspsych-content">
+                <p>Zuerst kommen einige Übungsdurchgänge, um Sie mit der Aufgabe vertraut zu machen.</p>
+                <p>Denken Sie daran: <strong>"${word_key.toUpperCase()}"</strong> für Wort, <strong>"${nonword_key.toUpperCase()}"</strong> für Nicht-Wort.</p>
+                <br><br>
+                <p>Drücken Sie eine <i>beliebige Taste</i>, um mit der Übung zu beginnen.</p>
+            </div>
+            `;
+      },
+      post_trial_gap: 500,
+    };
+    //timeline.push(practice_instructions);
+
+    var fixation_cue = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        const word = jsPsych.evaluateTimelineVariable('word');
+        const width = (word.length * 20) + 0; // 20px/char 
+        return `
+            <div class="fixation-cue" style="width: ${width}px;">
+                <div class="cue cue-top"></div>
+                <div class="cue cue-bottom"></div>
+                <div class="cue cue-left"></div>
+                <div class="cue cue-right"></div>
+            </div>`;
+      },
+      choices: "NO_KEYS",
+      trial_duration: 500,
+    };
+
+    var practice_trial = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        const word = jsPsych.evaluateTimelineVariable('word');
+        //const width = (word.length * 20) + 0;
+        return `
+          <div class="stimulus-text">${word}</div>
+          </div>`;
+      },
+      choices: [word_key, nonword_key],
+      //trial_duration: 2500,
+      data: function () {
+        const word_type = jsPsych.evaluateTimelineVariable('type');
+        const correct_response = word_type === 'word' ? word_key : nonword_key;
+        return {
+          task: 'practice',
+          word: jsPsych.evaluateTimelineVariable('word'),
+          correct_response: correct_response,
+          type: word_type
+        };
+      },
+      on_finish: function (data) {
+        data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+      }
+    };
+
+    var practice_feedback = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        const last_trial_correct = jsPsych.data.getLastTrialData().values()[0].correct;
+        return last_trial_correct ? '<p style="color: green;">Richtig!</p>' : '<p style="color: red;">Falsch!</p>';
+      },
+      choices: "NO_KEYS",
+      trial_duration: 500
+    };
+
+    var blank_screen = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '',
+      choices: "NO_KEYS",
+      trial_duration: 500,
+    };
+
+    var practice_procedure = {
+      timeline: [fixation_cue, practice_trial, practice_feedback, blank_screen],
+      timeline_variables: constrained_practice_trials,
+      randomize_order: false  // already shuffled above with constraints
+    };
+
+    //timeline.push(practice_procedure);
+
+    var end_practice = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        var practice_trials_data = jsPsych.data.get().filter({ task: 'practice' });
+        var correct_trials = practice_trials_data.filter({ correct: true });
+        var correct_count = correct_trials.count();
+        var total_count = practice_trials_data.count();
+        var practice_score = 0;
+        var rt_all = "–";
+
+        if (total_count > 0) {
+          practice_score = Math.round((correct_count / total_count) * 100);
+          rt_all = Math.round(practice_trials_data.select('rt').mean());
+        }
+
+        return `
+      <div class="jspsych-content">
+        <p>Die Übung ist nun beendet. Der Prozentsatz der richtigen Antworten betrug: <strong>${practice_score}%</strong>.</p>
+        <p>Ihre durchschnittliche Reaktionszeit war <b>${rt_all} ms</b>.</p><br>
+        <p><b>Das eigentliche Experiment beginnt jetzt.</b></p>
+        <p>Es wird keine Rückmeldung mehr zur Richtigkeit Ihrer Antworten geben.</p>
+        <p>Drücken Sie eine <i>beliebige Taste</i>, um zu beginnen.</p>
+      </div>`;
+      },
+      post_trial_gap: 500
+    };
+
+    //timeline.push(end_practice);
+
+    ////////////////////////////////////////////////////////////////////////
+    // --- MAIN EXPERIMENT ---
+
+    // Fixation cue trial
+    var fixation_cue_main = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        const word = jsPsych.evaluateTimelineVariable('word');
+        const width = word.length * 20;
+        return `
+      <div class="fixation-cue" style="width: ${width}px;">
+        <div class="cue cue-top"></div>
+        <div class="cue cue-bottom"></div>
+        <div class="cue cue-left"></div>
+        <div class="cue cue-right"></div>
+      </div>`;
+      },
+      choices: "NO_KEYS",
+      trial_duration: 500
+    };
+
+    // Main trial
+    var main_trial = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        const word = jsPsych.evaluateTimelineVariable('word');
+        return `<div class="stimulus-text" id="stimulus-word" style="visibility: hidden;">${word}</div>`;
+      },
+      choices: [word_key, nonword_key],
+      trial_duration: null,
+      on_load: function () {
+        setTimeout(() => {
+          const stim = document.getElementById('stimulus-word');
+          if (stim) stim.style.visibility = 'visible';
+        }, 10);
+      },
+      data: function () {
+        const word_type = jsPsych.evaluateTimelineVariable('type');
+        const correct_response = word_type === 'word' ? word_key : nonword_key;
+        return {
+          task: 'main',
+          word: jsPsych.evaluateTimelineVariable('word'),
+          correct_response: correct_response,
+          type: word_type
+        };
+      },
+      on_finish: function (data) {
+        data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+      }
+    };
+
+    // Blank screen
+    var blank_screen = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '',
+      choices: "NO_KEYS",
+      trial_duration: 500
+    };
+
+    // Feedback pause every 5 trials
+    function create_feedback_break(block_size, trial_num, total_trials) {
+      const progress = Math.round((trial_num / total_trials) * 100);
+      return {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: function () {
+          const recent_trials = jsPsych.data.get().filter({ task: 'main' }).last(block_size);
+          const correct_trials = recent_trials.filter({ correct: true });
+          const total_count = recent_trials.count();
+          const correct_count = correct_trials.count();
+          const accuracy = total_count > 0 ? Math.round((correct_count / total_count) * 100) : 0;
+          const rt_all = total_count > 0 ? Math.round(recent_trials.select('rt').mean()) : "–";
+
+          return `
+        <div class="jspsych-content" style="text-align: left;">
+          <p>Kurze Pause. <br>Sie haben <b>${progress}%</b> des Experiments abgeschlossen.</p>
+          <p>Der Prozentsatz der richtigen Antworten im letzten Block: <b>${accuracy}%</b>.</p>
+          <p>Durchschnittliche Reaktionszeit im letzten: <b>${rt_all} ms</b>.</p> <br><br>
+          <p><b>Bitte machen Sie mindestens 5 Sekunden Pause.</b></p>
+        </div>`;
+        },
+        choices: ['Weiter'],
+        post_trial_gap: 500,
+        enable_button_after: 5000
+      };
+    }
+
+    // Timeline array
+    var main_timeline = [];
+    const break_interval = 5; //change to 100 for the actualexperiment
+
+    for (let i = 0; i < randomized_stimuli.length; i++) {
+      // Add main trial block
+      main_timeline.push({
+        timeline: [fixation_cue_main, main_trial, blank_screen],
+        timeline_variables: [randomized_stimuli[i]]
+      });
+
+      const trial_num = i + 1;
+      const is_break_point = trial_num % break_interval === 0 || trial_num === randomized_stimuli.length;
+
+      if (is_break_point) {
+        // Add feedback pause
+        main_timeline.push(create_feedback_break(break_interval, trial_num, randomized_stimuli.length));
+
+        // Add data save call (saves *only* last block_size trials)
+        main_timeline.push(create_data_saving_block(break_interval));
+      }
+    }
+
+    // Final experiment wrapper
+    var main_experiment_with_breaks = {
+      timeline: main_timeline
+    };
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // --- demographics ---
+    ///////////////////////////////////////////////////////////////////////
+    var questionnaire_intro = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        var break_interval = 100; // update this if your block size is different
+        var main_data = jsPsych.data.get().filter({ task: 'main' }).last(break_interval);
+        var correct_trials = main_data.filter({ correct: true });
+        var total_trials = main_data.count();
+        var correct_count = correct_trials.count();
+        var accuracy = 0;
+        var rt_all = "–";
+
+        if (total_trials > 0) {
+          accuracy = Math.round((correct_count / total_trials) * 100);
+          rt_all = Math.round(main_data.select('rt').mean());
+        }
+
+        return `
+      <div class="jspsych-content" style="padding-top: 10px;">
+        <p>Der Hauptteil des Experiments ist abgeschlossen.</p><br>
+        <p><b>Bitte beantworten Sie nun einige Fragen zu Ihren biographischen Daten.</b></p>
+        <p>Drücken Sie eine <i>beliebige Taste</i>, um zu beginnen.</p>
+      </div>`;
+      },
+      post_trial_gap: 500
+    };
+
+
+    // timeline.push(questionnaire_intro);
+
+    var demographics = {
+      type: jsPsychSurveyMultiChoice,
+      data: { task: 'demographics' },
+      preamble: '<div style="padding-top: 10px;"></div>',  // top space before questions
+      questions: [
+        { prompt: "Geschlecht:", name: 'gender', options: ['männlich', 'weiblich', 'divers'], required: true },
+        { prompt: "Haben Sie Deutsch als Muttersprache (vor dem 2. Lebensjahr) erworben?", name: 'native_german', options: ['Ja', 'Nein'], required: true },
+        { prompt: "Haben Sie vor dem 2. Lebensjahr eine andere Sprache als Deutsch gelernt? Wenn ja, welche?", name: 'other_lang_early', options: ['Ja', 'Nein'], required: true },
+        { prompt: "Wurde bei Ihnen jemals eine sprachbezogene Störung (z. B. Legasthenie) diagnostiziert?", name: 'disorder', options: ['Ja', 'Nein'], required: true },
+      ],
+    };
+    // timeline.push(demographics);
+
+    var age_education = {
+      type: jsPsychSurveyText,
+      data: { task: 'demographics' },
+      preamble: '<div style="padding-top: 10px;"></div>',
+      questions: [
+        { prompt: "Alter:", name: 'age', required: true },
+        { prompt: "Wenn Sie 'Ja' zur Frage nach einer anderen frühen Sprache gesagt haben, welche war das?", name: 'other_lang_early_which', required: false },
+      ],
+    };
+    // timeline.push(age_education);
+
+    var education_levels = {
+      type: jsPsychSurveyMultiChoice,
+      data: { task: 'demographics' },
+      preamble: '<div style="padding-top: 10px;"></div>',
+      questions: [
+        { prompt: "Höchster Bildungsabschluss:", name: 'education', options: ['Schulabschluss', 'Berufsausbildung/Bachelor', 'Master/Promotion oder höher'], required: true },
+      ]
+    };
+    // timeline.push(education_levels);
+
+    var dialect_form = {
+      type: jsPsychSurveyHtmlForm,
+      data: { task: 'demographics' },
+      preamble: '<p style="padding-top: 10px; text-align: left;">Einige Fragen zu Ihrem sprachlichen Hintergrund.</p>',
+      html: `
+    <div style="text-align: left;">
+
+      <p>1. Sprechen Sie einen Dialekt?</p>
+      <label style="display: block;"><input type="radio" name="dialect" value="nie" required> Nie</label>
+      <label style="display: block;"><input type="radio" name="dialect" value="manchmal"> Manchmal</label>
+      <label style="display: block;"><input type="radio" name="dialect" value="oft"> Oft</label><br>
+
+      <p>2. Sind Sie mehrsprachig?</p>
+      <label style="display: block;"><input type="radio" name="multilingual" value="ja" required> Ja</label>
+      <label style="display: block;"><input type="radio" name="multilingual" value="nein"> Nein</label><br>
+
+      <p>3. Wenn ja, welche Sprachen sprechen Sie und wie würden Sie Ihre Kenntnisse auf einer Skala von 1 (Anfänger) bis 5 (fließend) bewerten?</p>
+      <textarea name="languages_proficiency" rows="4" cols="50" placeholder="z.B. Englisch (5), Französisch (2)" style="width: 100%;"></textarea><br><br>
+
+      <p>4. In welchem Ort sind Sie aufgewachsen?</p>
+      <input type="text" name="origin_region" id="origin-input" required style="width: 100%;"><br><br>
+
+      <p>5. An welchem Ort nehmen Sie an dieser Studie teil?</p>
+      <input type="text" name="site" required style="width: 100%;"><br><br>
+
+      <p>6. Händigkeit:</p>
+      <label style="display: block;"><input type="radio" name="handedness" value="rechts" required> Rechtshänder</label>
+      <label style="display: block;"><input type="radio" name="handedness" value="links"> Linkshänder</label>
+      <label style="display: block;"><input type="radio" name="handedness" value="beide"> Beidhänder</label>
+
+    </div>
+  `
+    };
+
+    //save all demographics data to separate file
+    const save_questionnaire_data = {
+  type: jsPsychCallFunction,
+  func: () => {
+    const questionnaire_data = jsPsych.data.get().filter({ task: 'demographics' });
+    questionnaire_data.addToAll({ subject_id: subject_id });
+
+    const csvData = questionnaire_data.csv();
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/[:.]/g, '-');
+    const filename = `ger_lex_proj_p${subject_id}_demo_${timestamp}.csv`;
+
+    saveData(filename, csvData);
+  }
+};
+
+    // timeline.push(dialect_form);
+
+    // Define the call-function trial using jsPsych v8 syntax
+    /*const save_data_block = {
+
+      type: jsPsychCallFunction,
+      func: () => {
+        const csvData = jsPsych.data.get().csv();
+        saveData(`association_${subject_id}_${trial_num}trials.csv`, csvData);
+        //const csvData = jsPsych.data.get().csv();
+        //saveData("association_" + subject_id + ".csv", jsPsych.data.get().csv());
+        //saveData(`association_${subject_id}_part${i + 1}.csv`, csvData);
+        //saveData(`association_${subject_id}.csv`, csvData);
+      }
+    };*/
+
+
+    ////timeline.push(save_data_block);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // --- FINAL ---
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    var thankYou = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        var main_trials = jsPsych.data.get().filter({ task: 'main' });
+        var correct_trials = main_trials.filter({ correct: true });
+        var vocabulary_score = 0;
+        if (main_trials.count() > 0) {
+          vocabulary_score = Math.round((correct_trials.count() / main_trials.count()) * 100);
+        }
+        return `
+        <div class="jspsych-content">
+            <p>Vielen Dank für Ihre Teilnahme!</p>
+            <p>Ihre Daten wurden gespeichert.</p><br><br>
+            <p>Drücken Sie eine <i>beliebige Taste</i>, um das Experiment zu beenden und dieses Fenster zu schließen.</p>
+        </div>`;
+      }
+    };
+    //timeline.push(thankYou);
+
+    //exit full screen//
+    var exit_fullscreen = {
+      type: jsPsychFullscreen,
+      fullscreen_mode: false,
+      delay_after: 0
+    };
+    //timeline.push(exit_fullscreen)
+
+    // Final combined timeline
+    var timeline = [
+      enter_fullscreen,
+      informed_consent,
+      instructions,
+      practice_instructions,
+      practice_procedure,
+      end_practice,
+      main_experiment_with_breaks,
+      questionnaire_intro,
+      demographics,
+      age_education,
+      education_levels,
+      dialect_form,
+      save_questionnaire_data,
+      thankYou,
+      exit_fullscreen
+    ];
+
+    // Start the experiment
+    jsPsych.run(timeline);
+  }
+</script>
+
+</html>
