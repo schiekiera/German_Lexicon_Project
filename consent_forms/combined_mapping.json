@@ -272,8 +272,8 @@
     "2_individual_completion_sentence": "no",
     "2_individual_completion_sentence_text": null
   },
-  "mannheim_allgemeine": {
-    "0a_html_consent_form_location": "consent_forms/consent_form_mannheim_allgemeine.html",
+  "mannheim_kognitive_psychologie": {
+    "0a_html_consent_form_location": "consent_forms/consent_form_mannheim_kognitive_psychologie.html",
     "0b_reading_fluency_test": "no",
     "1a_individual_complete_consent_form": "no",
     "1b_individual_reimbursement": "yes",
