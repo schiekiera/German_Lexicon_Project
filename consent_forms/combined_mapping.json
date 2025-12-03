@@ -126,8 +126,8 @@
     "1c_individual_data_protection_text": "<p>TU Dresden<br>Fakultät für Psychologie<br>Allgemeine Psychologie<br>Zellescher Weg 17, 01069 Dresden<br>Dr. Xenia Schmalz<br>Telefon: +49 351 463-36011<br>E-Mail: <a href='mailto:xenia.kudlackova_schmalz@tu-dresden.de'>xenia.kudlackova_schmalz@tu-dresden.de</a></p>",
     "1d_individual_complain": "yes",
     "1d_individual_complain_text": "<p>Sie haben das Recht, Beschwerde bei einer mitgliedstaatlichen Aufsichtsbehörde einzulegen, wenn Zweifel an der Rechtmäßigkeit der Verarbeitung der Sie betreffenden personenbezogenen Daten bestehen. Zuständige Aufsichtsbehörde für die TU Dresden (<a href='https://tu-dresden.de/tu-dresden/organisation/gremien-und-beauftragte/beauftragte/datenschutzbeauftragter' target='_blank' rel='noopener noreferrer'>https://tu-dresden.de/tu-dresden/organisation/gremien-und-beauftragte/beauftragte/datenschutzbeauftragter</a>). Unbeschadet dieses Beschwerderechts können Sie sich bei datenschutzrechtlichen Fragen jederzeit an die Behördliche Datenschutzbeauftragte der TU Dresden, Tel: +49351463-32839, E-Mail: <a href='mailto:informationssicherheit@tu-dresden.de'>informationssicherheit@tu-dresden.de</a> wenden.</p><p>Sollten Sie von Ihren oben genannten Rechten Gebrauch machen, prüft die öffentliche Stelle, ob die gesetzlichen Voraussetzungen hierfür erfüllt sind.</p><p>Auf anonymisierte Daten sind die genannten Rechte grundsätzlich nicht anwendbar, da diese nicht mehr mit Ihrer Person in Verbindung gebracht werden können.</p><p>Bitte wenden Sie sich bei Wahrnehmung Ihrer Betroffenenrechte an Dr. Xenia Schmalz<br>Allgemeine Psychologie<br>Zellescher Weg 17, 01069 Dresden<br>Telefon: +49351463-36011<br>E-Mail: <a href='mailto:xenia.kudlackova_schmalz@tu-dresden.de'>xenia.kudlackova_schmalz@tu-dresden.de</a></p>",
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://www.psytoolkit.org/c/3.6.5/survey?s=LEZJ6' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
   },
   "hildesheim": {
     "0a_html_consent_form_location": "consent_forms/consent_form_hildesheim.html",
@@ -258,31 +258,5 @@
     "1d_individual_complain_text": null,
     "2_individual_completion_sentence": "no",
     "2_individual_completion_sentence_text": null
-  },
-  "potsdam": {
-    "0a_html_consent_form_location": "consent_forms/consent_form_potsdam.html",
-    "0b_reading_fluency_test": "no",
-    "1a_individual_complete_consent_form": "no",
-    "1b_individual_reimbursement": "no",
-    "1b_individual_reimbursement_text": null,
-    "1c_individual_data_protection": "no",
-    "1c_individual_data_protection_text": null,
-    "1d_individual_complain": "no",
-    "1d_individual_complain_text": null,
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
-  },
-  "mannheim_kognitive_psychologie": {
-    "0a_html_consent_form_location": "consent_forms/consent_form_mannheim_kognitive_psychologie.html",
-    "0b_reading_fluency_test": "no",
-    "1a_individual_complete_consent_form": "no",
-    "1b_individual_reimbursement": "yes",
-    "1b_individual_reimbursement_text": "<p>Psychologie-Studierende der Universität Mannheim (Hauptfach und Beifach, Lehramt ausgenommen) erhalten für ihre vollständige Teilnahme an dieser Studie 1 VP-Stunde über SONA. Dazu müssen Sie am Ende dem Link folgen und Ihre SONA-ID eingeben. Bitte haben Sie Verständnis, dass die Gutschrift etwas Zeit beanspruchen kann, insbesondere bei diesem Projekt in externer Kooperation mit der HU Berlin.</p>",
-    "1c_individual_data_protection": "no",
-    "1c_individual_data_protection_text": null,
-    "1d_individual_complain": "no",
-    "1d_individual_complain_text": null,
-    "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://open-lab.online/study/cdumktfqop/' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
   }
 }
