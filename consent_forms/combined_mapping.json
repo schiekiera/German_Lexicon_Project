@@ -150,8 +150,8 @@
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://hu-berlin.sona-systems.com/webstudy_credit.aspx?experiment_id=91&credit_token=dbbd992b77204b54a13d8e99871858a0&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
   },
   "tuebingen": {
     "0_html_consent_form_location": "consent_forms/consent_form_tuebingen.html",

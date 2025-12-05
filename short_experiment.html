@@ -788,16 +788,24 @@
     <div style="text-align: left;padding-left: 50px;font-size: 24px;">
 
       <p>Wie alt sind Sie?</p>
-      <input type="text" name="age" id="origin-input" required style="width: 100%;"><br><br>
+      <input type="text" name="age" id="age_input" required style="width: 100%;"><br><br>
 
+     
       <p>In welchem Land sind Sie aufgewachsen?</p>
-      <input type="text" name="origin_region" id="origin-input" required style="width: 100%;"><br><br>
+      <input type="text" name="origin_region" id="origin_input" required style="width: 100%;"><br><br>
 
-      <p>Wie lauten die ersten zwei Ziffern der Postleitzahl?</p>
-      <input type="text" name="origin_region" id="origin-input" required style="width: 100%;"><br><br>
+      <p>Falls Sie in der vorherigen Frage Deutschland, Österreich oder die Schweiz angegeben haben:
+         Wie lauten die ersten zwei Ziffern von der Postleitzahl des Ortes, in dem Sie aufgewachsen sind?</p>
+      <input type="text" name="PLZ_origin_region" id="PLZ_origin_input" required style="width: 100%;"><br><br>
 
-      <p>An welchem Ort nehmen Sie an dieser Studie teil?</p>
-      <input type="text" name="site" required style="width: 100%;"><br><br>
+      <p>In welchem Land nehmen nehmen Sie an dieser Studie teil?</p>
+      <input type="text" name="site" id="site_input" required style="width: 100%;"><br><br>
+
+      <p>Falls Sie in der vorherigen Frage Deutschland, Österreich oder die Schweiz angegeben haben:
+        Wie lauten die ersten zwei Ziffern von der Postleitzahl des Ortes, an dem Sie an der Studie teilnehmen?</p>
+      <input type="text" name="PLZ_site" id="PLZ_site_input" required style="width: 100%;"><br><br>
+
+
 
     </div>
   `
@@ -902,66 +910,77 @@
             post_trial_gap: 500
           };
 
+/* ----------------------- 17) THANK YOU AND REIMBURSMENT --------------------- */
+// --- default completion text ---
+let completionText = "<p>Bitte kontaktieren Sie die Studienleitung für weitere Informationen.</p>";
 
-          /* ----------------------- 17) THANK YOU AND REIMBURSMENT --------------------- */
-          // --- default completion text ---
-          let completionText = "<p>Bitte kontaktieren Sie die Studienleitung für weitere Informationen.</p>";
+// --- load external mapping ---
+fetch("consent_forms/combined_mapping.json")
+  .then(response => response.json())
+  .then(mapping => {
+    const uniData = mapping[uniParam] || mapping["default"];
 
-          // --- load external mapping ---
-          fetch("consent_forms/combined_mapping.json")
-            .then(response => response.json())
-            .then(mapping => {
-              const uniData = mapping[uniParam] || mapping["default"];
+    // Reset to empty first, so we can append conditionally
+    completionText = "";
 
-              // Reset to empty first, so we can append conditionally
-              completionText = "";
+    // Append texts based on flags
+    if (uniData["1a_individual_reimbursement"] === "yes") {
+      completionText += `<p>${uniData["1a_individual_reimbursement_text"]}</p>`;
+    }
 
-              // Append texts based on flags
-              if (uniData["1a_individual_reimbursement"] === "yes") {
-                completionText += `<p>${uniData["1a_individual_reimbursement_text"]}</p>`;
-              }
-              if (uniData["2_individual_completion_sentence"] === "yes") {
-                completionText += `<p>${uniData["2_individual_completion_sentence_text"]}</p>`;
-              }
+    if (uniData["2_individual_completion_sentence"] === "yes") {
+      let text = uniData["2_individual_completion_sentence_text"] || "";
 
-              // If no individual texts were appended, use default
-              if (completionText === "") {
-                completionText = uniData["default_text"] || "<p>Bitte kontaktieren Sie die Studienleitung für weitere Informationen.</p>";
-              }
-            });
+      // ✅ NEW: replace survey_code value with sonaParam (if present)
+      if (sonaParam && text.includes("survey_code=")) {
+        text = text.replace(/(survey_code=)[^&\s'"]*/i, '$1' + sonaParam);
+      }
 
-          var thankYou = {
-            type: jsPsychHtmlKeyboardResponse,
-            stimulus: function () {
-              var main_trials = jsPsych.data.get().filter({ task: 'main' });
-              var correct_trials = main_trials.filter({ correct: true });
-              var vocabulary_score = 0;
-              if (main_trials.count() > 0) {
-                vocabulary_score = Math.round((correct_trials.count() / main_trials.count()) * 100);
-              }
-              return `
+      completionText += `<p>${text}</p>`;
+    }
+
+    // If no individual texts were appended, use default
+    if (completionText === "") {
+      completionText = uniData["default_text"] || "<p>Bitte kontaktieren Sie die Studienleitung für weitere Informationen.</p>";
+    }
+  });
+
+var thankYou = {
+  type: jsPsychHtmlKeyboardResponse,
+  choices: "NO_KEYS",
+  clear_screen: false,  
+  stimulus: function () {
+    var main_trials = jsPsych.data.get().filter({ task: 'main' });
+    var correct_trials = main_trials.filter({ correct: true });
+    var vocabulary_score = 0;
+
+    if (main_trials.count() > 0) {
+      vocabulary_score = Math.round((correct_trials.count() / main_trials.count()) * 100);
+    }
+
+    return `
       <div class="jspsych-content">
         <p>Vielen Dank für Ihre Teilnahme!</p>
         <p>Ihre Daten wurden gespeichert.</p><br><br>
         <div style="text-align: left; width: 105%;">
-      ${completionText}
-    </div>
+          ${completionText}
+        </div>
       </div>`;
-            }
-          };
+  },
+  on_load: function() {
+    // Listen for ANY key and exit fullscreen, but do NOT end this trial
+    const exitHandler = function() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
 
+      // remove listener after first press
+      document.removeEventListener("keydown", exitHandler);
+    };
 
-
-          /* ----------------------- 18) EXIT --------------------- */
-          var exit_fullscreen = {
-            type: jsPsychFullscreen,
-            fullscreen_mode: false,
-            delay_after: 0
-          };
-          //timeline.push(exit_fullscreen)
-
-
-
+    document.addEventListener("keydown", exitHandler);
+  }
+};
 
           /* ----------------------- 19) TIMELINE --------------------- */
           const timeline = [];
@@ -969,8 +988,8 @@
           //timeline.push(preload);
           timeline.push(enter_fullscreen);
           timeline.push(informed_consent);
-          if (includePersonalCode) timeline.push(personal_code_question);
-          timeline.push(instructions);
+          //if (includePersonalCode) timeline.push(personal_code_question);
+          /*timeline.push(instructions);
           timeline.push(practice_instructions);
           timeline.push(practice_procedure);
           timeline.push(end_practice);
@@ -981,9 +1000,8 @@
           timeline.push(dialect);
           timeline.push(save_questionnaire_data);
           timeline.push(cleanup_routine);
-          timeline.push(debriefing);
+          timeline.push(debriefing);*/
           timeline.push(thankYou);
-          timeline.push(exit_fullscreen);
 
           // Start the experiment
           jsPsych.run(timeline);
@@ -993,10 +1011,8 @@
           document.body.innerHTML = `<p><b>Fehler beim Laden der Einverständniserklärung.</b><br>${error.message}</p>`;
         });
     }
+  };
 
-  }
-  //}
-  ;
 </script>
 
 </html>
