@@ -241,5 +241,16 @@
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://open-lab.online/study/cdumktfqop/' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
+  },
+  "wuppertal": {
+    "0_html_consent_form_location": "consent_forms/consent_form_wuppertal.html",
+    "1a_individual_reimbursement": "no",
+    "1a_individual_reimbursement_text": null,
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "no",
+    "2_individual_completion_sentence_text": null
   }
 }
