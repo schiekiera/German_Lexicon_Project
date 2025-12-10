@@ -166,7 +166,7 @@
     });
 
     // Calculate which slice of the full stimulus list a given participant should receive, based on their participant ID
-    const items_per_participant = 1440; //change to 1440 for the actual experiment
+    const items_per_participant = 1250; //change to 1250 for the actual experiment
     const start_index = (ID - 1) * items_per_participant;
     const end_index = start_index + items_per_participant;
 
@@ -711,7 +711,7 @@
 
           // Timeline array
           var main_timeline = [];
-          const break_interval = 90; // update this if your block size is different -//change to 90 for the actualexperiment
+          const break_interval = 125; // update this if your block size is different -//change to 125 for the actualexperiment
 
           for (let i = 0; i < randomized_stimuli.length; i++) {
             // Add main trial block
@@ -743,7 +743,7 @@
           var questionnaire_intro = {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: function () {
-              var break_interval = 90; // update this if your block size is different -//change to 90 for the actualexperiment
+              var break_interval = 125; // update this if your block size is different -//change to 125 for the actualexperiment
               var main_data = jsPsych.data.get().filter({ task: 'main' }).last(break_interval);
               var correct_trials = main_data.filter({ correct: true });
               var total_trials = main_data.count();
