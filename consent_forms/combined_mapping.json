@@ -34,14 +34,14 @@
   },
   "twente": {
     "0_html_consent_form_location": "consent_forms/consent_form_twente.html",
-    "1a_individual_reimbursement": "no",
-    "1a_individual_reimbursement_text": null,
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p> Sie erhalten für ihre Teilnahme SONA credits. </p>",
     "1b_individual_data_protection": "no",
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://utwente.sona-systems.com/webstudy_credit.aspx?experiment_id=3347&credit_token=e77b722d42a94679a6cec3f6abf09574&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
   },
   "iu": {
     "0_html_consent_form_location": "consent_forms/consent_form_iu.html",
@@ -144,8 +144,8 @@
   },
   "hu": {
     "0_html_consent_form_location": "consent_forms/consent_form_hu.html",
-    "1a_individual_reimbursement": "no",
-    "1a_individual_reimbursement_text": null,
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe einer VP-Stunde. Die Vergütung wird Ihnen im SONA-System der HU bestätigt, wenn Sie die Studie vollständig bearbeitet haben. Bei Problemen informieren Sie bitte die Projektverantwortlichen der Studie.</p>",
     "1b_individual_data_protection": "no",
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
@@ -166,7 +166,6 @@
   },
   "aachen": {
     "0_html_consent_form_location": "consent_forms/consent_form_aachen.html",
-    "1a_individual_complete_consent_form": "no", 
     "1a_individual_reimbursement": "yes",
     "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von einer <strong>VP‑Stunde</strong>.</p>",
     "1b_individual_data_protection": "yes",
