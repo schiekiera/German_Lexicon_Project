@@ -196,6 +196,10 @@
     // Generate a unique subject ID
     const subject_id = Math.floor(Math.random() * 1000000);
 
+    // Generate a unique completion code for Goettingen
+    const completion_code_goettingen = Math.floor(Math.random() * 1000000);
+    
+     
     function saveData(name, data) {
       const folderName = uniParam;
 
@@ -938,8 +942,7 @@ fetch("consent_forms/combined_mapping.json")
 
       // GOETTINGEN CODE: replace %TEILNAHMECODE% with the jsPsych-generated completion code
       if (uniParam === "goettingen" && text.includes("%TEILNAHMECODE%")) {
-       text = text.replace("%TEILNAHMECODE%", subject_id);
-      }
+       text = text.replace("%TEILNAHMECODE%", completion_code_goettingen);      }
 
       completionText += `<p>${text}</p>`;
     }
