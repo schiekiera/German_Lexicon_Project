@@ -96,7 +96,7 @@
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%TEILNAHMECODE%</strong>. Bitte senden Sie ihn an paedpsychstudie@uni-goettingen.de</p>"
+    "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%TEILNAHMECODE%</strong>. Bitte senden Sie ihn an <a href='mailto:paedpsychlab@psych.uni-goettingen.de'>paedpsychlab@psych.uni-goettingen.de</a> mit dem Hinweis, dass sie an der 'Wort-Studie' teilgenommen haben.</p>"
     },
   "dresden": {
     "0_html_consent_form_location": "consent_forms/consent_form_dresden.html",
