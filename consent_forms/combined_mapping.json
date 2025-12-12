@@ -87,16 +87,16 @@
     "2_individual_completion_sentence": "no",
     "2_individual_completion_sentence_text": null
   },
-  "goettingen": {
+"goettingen": {
     "0_html_consent_form_location": "consent_forms/consent_form_goettingen.html",
     "1a_individual_reimbursement": "yes",
-    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 1 Versuchspersonenstunde pro Stunde.</p>",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 1 Versuchspersonenstunde.</p>",
     "1b_individual_data_protection": "yes",
     "1b_individual_data_protection_text": "<p>Prof. Dr. Sascha Schroeder<br>Georg-Elias-Müller-Institut für Psychologie<br>Universität Göttingen<br>Waldweg 26, 37073 Göttingen<br>Telefon: +49 551 39-21110<br>E-Mail: <a href='mailto:sascha.schroeder@psych.uni-goettingen.de'>sascha.schroeder@psych.uni-goettingen.de</a><br><br>in Zusammenarbeit mit der Humboldt-Universität zu Berlin</p>",
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text": "<p>Vielen Dank für die Teilnahme an unserer Studie. Ihr Teilnahmecode ist<br>%TEILNAHMECODE%<br>. Bitte senden Sie ihn an paedpsychstudie@uni-goettingen.de</p>"
+    "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%TEILNAHMECODE%</strong>. Bitte senden Sie ihn an paedpsychstudie@uni-goettingen.de</p>"
     },
   "dresden": {
     "0_html_consent_form_location": "consent_forms/consent_form_dresden.html",
