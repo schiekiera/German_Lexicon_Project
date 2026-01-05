@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // Generate a random number (example: 8-digit)
+    const surveyCode = Math.floor(10000000 + Math.random() * 90000000);
+
+    const targetUrl =
+      "https://amor.cms.hu-berlin.de/~petrenal/GermanLexiconProject/jspsych.8.2.1/experiment.html"
+      + "?uni=marburg&sona=" + surveyCode;
+
+    // Redirect
+    window.location.replace(targetUrl);
+  </script>
+</head>
+<body>
+  <p>Redirecting to the experiment...</p>
+</body>
+</html>
