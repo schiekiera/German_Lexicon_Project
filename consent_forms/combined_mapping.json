@@ -195,7 +195,7 @@
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text": "<p>Bitte senden Sie diesen Code <strong>survey_code=XXXX</strong> zusammen mit Ihrem vollständigen Namen und Ihrer Bankverbindung (IBAN, BIC, Name der Bank) an <a href='mailto:florian.hintz@uni-marburg.de'>florian.hintz@uni-marburg.de</a> mit dem Betreff 'Vergütung German Lexicon Project'. Diese Informationen werden zur Veranlassung der Überweisung Ihrer Aufwandsentschädigung an die Universitätsverwaltung weitergeleitet.</p>"
+    "2_individual_completion_sentence_text": "<p>Bitte senden Sie diesen Code <strong> survey_code=XXXX </strong> zusammen mit Ihrem vollständigen Namen und Ihrer Bankverbindung (IBAN, BIC, Name der Bank) an <a href='mailto:florian.hintz@uni-marburg.de'>florian.hintz@uni-marburg.de</a> mit dem Betreff 'Vergütung German Lexicon Project'. Diese Informationen werden zur Veranlassung der Überweisung Ihrer Aufwandsentschädigung an die Universitätsverwaltung weitergeleitet.</p>"
   },
   "ipu": {
     "0_html_consent_form_location": "consent_forms/consent_form_ipu.html",
