@@ -189,13 +189,13 @@
   "marburg": {
     "0_html_consent_form_location": "consent_forms/consent_form_marburg.html",
     "1a_individual_reimbursement": "yes",
-    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 10,00€. Weitere Informationen zur Aufwandsentschädigung erhalten Sie am Ende des Experiments. Bei technischen Problemen wenden Sie sich bitte an Projektverantwortlichen der Studie.</p>",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 10,00€. Bei technischen Problemen melden Sie sich bitte bei den Projektverantwortlichen der Studie.</p>",
     "1b_individual_data_protection": "no",
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text": "<p>Bitte senden Sie diesen Code <strong> survey_code=XXXX </strong> zusammen mit Ihrem vollständigen Namen und Ihrer Bankverbindung (IBAN, BIC, Name der Bank) an <a href='mailto:florian.hintz@uni-marburg.de'>florian.hintz@uni-marburg.de</a> mit dem Betreff 'Vergütung German Lexicon Project'. Diese Informationen werden zur Veranlassung der Überweisung Ihrer Aufwandsentschädigung an die Universitätsverwaltung weitergeleitet und direkt danach gelöscht. </p>"
+    "2_individual_completion_sentence_text": "<p>Bitte senden Sie diesen Code <strong> survey_code=XXXX </strong> zusammen mit Ihrem vollständigen Namen und Ihrer Bankverbindung (IBAN, BIC, Name der Bank) an <a href='mailto:florian.hintz@uni-marburg.de'>florian.hintz@uni-marburg.de</a> mit dem Betreff 'Vergütung German Lexicon Project'. Diese Informationen werden zur Veranlassung der Überweisung Ihrer Aufwandssentschädigung an die Universitätsverwaltung weitergeleitet und direkt danach gelöscht. </p>"
   },
   "ipu": {
     "0_html_consent_form_location": "consent_forms/consent_form_ipu.html",
