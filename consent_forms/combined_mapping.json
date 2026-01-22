@@ -78,8 +78,8 @@
     },
   "leipzig": {
     "0_html_consent_form_location": "consent_forms/consent_form_leipzig.html",
-    "1a_individual_reimbursement": "no",
-    "1a_individual_reimbursement_text": "<p>Für die Vergabe einer VP-Stunde im STS schreiben Sie bitte eine Mail mit dem Keyword 'Sprache' an jascha.ruesseler@uni-bamberg.de</p>",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 1.5 Versuchspersonenstunden. Bitte folgen Sie dazu den Anweisungen, die nach Abschluss der Studie auf dem Bildschirm angezeigt werden.",
     "1b_individual_data_protection": "no",
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
@@ -155,6 +155,17 @@
   },
   "tuebingen": {
     "0_html_consent_form_location": "consent_forms/consent_form_tuebingen.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme entweder eine Aufwandsentschädigung in Höhe von 11,00 € pro Stunde oder eine entsprechende Anrechnung in Form von Versuchspersonenstunden (VP-Stunden). Bei vorzeitigem Abbruch erhalten Sie eine anteilige Vergütung bzw. Anrechnung. Bitte setzen Sie sich hierzu mit dem Projektverantwortlichen der Studie in Kontakt.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://uni-tuebingen.sona-systems.com/webstudy_credit.aspx?experiment_id=680&credit_token=4dba2c490b44478fbd31d5fc828965a1&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
+  },
+  "tuebingen_not_sona": {
+    "0_html_consent_form_location": "consent_forms/consent_form_tuebingen_not_sona.html",
     "1a_individual_reimbursement": "yes",
     "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme entweder eine Aufwandsentschädigung in Höhe von 11,00 € pro Stunde oder eine entsprechende Anrechnung in Form von Versuchspersonenstunden (VP-Stunden). Bei vorzeitigem Abbruch erhalten Sie eine anteilige Vergütung bzw. Anrechnung. Bitte setzen Sie sich hierzu mit dem Projektverantwortlichen der Studie in Kontakt.</p>",
     "1b_individual_data_protection": "no",
