@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // Generate 8-digit survey code
+    const surveyCode = Math.floor(10000000 + Math.random() * 90000000);
+
+    // Function to save code and then redirect
+    async function saveAndRedirect() {
+      try {
+        const response = await fetch("codes_hildesheim.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ surveyCode })
+        });
+
+        const text = await response.text();
+        console.log(text); // optional: see server response
+
+      } catch (err) {
+        console.error("Could not save code:", err);
+      }
+
+      // Redirect after save attempt
+      const targetUrl =
+        "https://amor.cms.hu-berlin.de/~petrenal/GermanLexiconProject/jspsych.8.2.1/test_short_experiment.html"
+        + "?uni=hildesheim&sona=" + surveyCode;
+
+      window.location.replace(targetUrl);
+    }
+
+    saveAndRedirect();
+  </script>
+</head>
+<body>
+  <p>Redirecting to the experiment...</p>
+</body>
+</html>
