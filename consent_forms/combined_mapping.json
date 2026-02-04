@@ -208,16 +208,27 @@
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Bitte senden Sie diesen Code <strong> survey_code=XXXX </strong> zusammen mit Ihrem vollständigen Namen und Ihrer Bankverbindung (IBAN, BIC, Name der Bank) an <a href='mailto:florian.hintz@uni-marburg.de'>florian.hintz@uni-marburg.de</a> mit dem Betreff 'Vergütung German Lexicon Project'. Diese Informationen werden zur Veranlassung der Überweisung Ihrer Aufwandssentschädigung an die Universitätsverwaltung weitergeleitet und direkt danach gelöscht. </p>"
   },
-  "ipu": {
-    "0_html_consent_form_location": "consent_forms/consent_form_ipu.html",
-    "1a_individual_reimbursement": "no",
-    "1a_individual_reimbursement_text": null,
+  "ipu_sona": {
+    "0_html_consent_form_location": "consent_forms/consent_form_ipu_sona.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von einer <strong>VP‑Stunde</strong>.</p>",
     "1b_individual_data_protection": "no",
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text":  "<p>Bitte klicken Sie diesen <a href='S O N A L I N K' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
+  },
+  "ipu_prolific": {
+    "0_html_consent_form_location": "consent_forms/consent_form_ipu_prolific.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 11,00 €.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Klicken Sie auf diesen <a href='P R O L I F I C L I N K' target='_blank'>Link</a>, um Ihre Vergütung auf Prolific zu erhalten."
   },
    "erfurt": {
     "0_html_consent_form_location": "consent_forms/consent_form_erfurt.html",
@@ -230,7 +241,6 @@
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Vielen Dank für Ihre Teilnahme!</p><p>Bitte klicken Sie diesen <a href='https://erfurt-lab.sona-systems.com/webstudy_credit.aspx?experiment_id=62&credit_token=e1f5ee7711d3452588bf11b009ed05ce&survey_code=XXXX' target='_blank'>Link</a> um Ihre Teilnahme abzuschließen und Ihre VP-Stunde zu erhalten."
   },
-
   "potsdam": {
     "0_html_consent_form_location": "consent_forms/consent_form_potsdam.html",
     "1a_individual_reimbursement": "no",
