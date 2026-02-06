@@ -128,8 +128,8 @@
     "1b_individual_data_protection_text": "<p><strong>Verantwortliche an der Freien Universität Berlin</strong><br>Dr. Jana Lüdtke<br>Telefon: 030 838 55193<br>E-Mail: <a href='mailto:jana.luedtke@fu-berlin.de'>jana.luedtke@fu-berlin.de</a></p><p><strong>Kooperationspartner und Verantwortlicher für Datenschutz</strong><br>Humboldt-Universität zu Berlin<br>Lebenswissenschaftliche Fakultät<br>Institut für Psychologie<br>Nachwuchsgruppe „Komputationelle Modellierungen“<br>Unter den Linden 6, 10099 Berlin<br>Dr. Fritz Günther<br>Telefon: 030 2093-9340<br>E-Mail: <a href='mailto:fritz.guenther@hu-berlin.de'>fritz.guenther@hu-berlin.de</a></p>",
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://fu-berlin.sona-systems.com/webstudy_credit.aspx?experiment_id=375&credit_token=e0951e16908340daa34ca0b353e67e38&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
   },
   "pavia": {
     "0_html_consent_form_location": "consent_forms/consent_form_pavia.html",
