@@ -239,7 +239,7 @@
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text": "<p>Vielen Dank für Ihre Teilnahme!</p><p>Bitte klicken Sie diesen <a href='https://erfurt-lab.sona-systems.com/webstudy_credit.aspx?experiment_id=62&credit_token=e1f5ee7711d3452588bf11b009ed05ce&survey_code=XXXX' target='_blank'>Link</a> um Ihre Teilnahme abzuschließen und Ihre VP-Stunde zu erhalten."
+    "2_individual_completion_sentence_text": "<p>Vielen Dank für Ihre Teilnahme!</p><p>Bitte klicken Sie diesen <a href='https://erfurt-lab.sona-systems.com/webstudy_credit.aspx?experiment_id=62&credit_token=e1f5ee7711d3452588bf11b009ed05ce&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Vergütung auf Prolific zu erhalten."
   },
   "potsdam": {
     "0_html_consent_form_location": "consent_forms/consent_form_potsdam.html",
@@ -249,9 +249,10 @@
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text":"<p>Vielen Dank für Ihre Teilnahme!</p><p>Bitte klicken Sie diesen <a href='https://app.prolific.com/submissions/complete?cc=C9KC0ULP' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre VP-Stunde zu erhalten."
   },
+    
   "mannheim_kognitive_psychologie": {
     "0_html_consent_form_location": "consent_forms/consent_form_mannheim_kognitive_psychologie.html",
     "1a_individual_reimbursement": "yes",
