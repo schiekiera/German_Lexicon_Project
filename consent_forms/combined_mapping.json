@@ -140,7 +140,7 @@
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://app.prolific.com/submissions/complete?cc=CKQ81U7X' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
+    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://app.prolific.com/submissions/complete?cc=C1L8XPQV' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
   },
   "hu": {
     "0_html_consent_form_location": "consent_forms/consent_form_hu.html",
@@ -250,7 +250,18 @@
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text":"<p>Vielen Dank für Ihre Teilnahme!</p><p>Bitte klicken Sie diesen <a href='https://app.prolific.com/submissions/complete?cc=C9KC0ULP' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre VP-Stunde zu erhalten."
+    "2_individual_completion_sentence_text":"<p>Vielen Dank für Ihre Teilnahme!</p><p>Bitte klicken Sie diesen <a href='https://app.prolific.com/submissions/complete?cc=C9KC0ULP' target='_blank'>Link</a>, und Ihre Aufwandsentschädigung zu erhalten.</p>"
+  },
+    "potsdam_sona": {
+    "0_html_consent_form_location": "consent_forms/consent_form_potsdam_sona.html",
+    "1a_individual_reimbursement": "no",
+    "1a_individual_reimbursement_text": null,
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text":"<p>Vielen Dank für Ihre Teilnahme!</p><p>Bitte klicken Sie diesen <a href='INSERT THE LINK' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
   },
     
   "mannheim_kognitive_psychologie": {
