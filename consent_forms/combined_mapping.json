@@ -331,5 +331,16 @@
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Klicken Sie auf diesen <a href='https://fernuni-hagen.sona-systems.com/webstudy_credit.aspx?experiment_id=911&credit_token=dc85749396dd45f4ad8b9668f12e1ccc&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Versuchspersonenstunde zu erhalten und auf SONA weitergeleitet zu werden."
+  },
+  "trier": {
+    "0_html_consent_form_location": "consent_forms/consent_form_trier.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 12,50€. Die Vergütung wird Ihnen ausgezahlt, nachdem Sie die Studie vollständig bearbeitet haben.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "Bitte kontaktieren Sie die Projektverantwortlichen der Studie, um Ihre Aufwandsentschädigung zu erhalten."
   }
 }
