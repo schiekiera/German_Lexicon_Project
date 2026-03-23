@@ -54,17 +54,17 @@
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://iuinternationalehochschule.sona-systems.com/webstudy_credit.aspx?experiment_id=369&credit_token=2d95217748f746ff940481c89a411108&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre VP-Stunde angerechnet zu bekommen.</p>"
   },
-  "ipn": {
-    "0_html_consent_form_location": "consent_forms/consent_form_ipn.html",
-    "1a_individual_reimbursement": "yes",
-    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde. Bei vorzeitigem Abbruch erhalten Sie eine anteilige Vergütung. Bitte setzen Sie sich hierzu mit dem Projektverantwortlichen der Studie in Kontakt.</p>",
-    "1b_individual_data_protection": "no",
-    "1b_individual_data_protection_text": null,
-    "1c_individual_complain": "no",
-    "1c_individual_complain_text": null,
-    "2_individual_completion_sentence": "no",
-    "2_individual_completion_sentence_text": null
-  },
+    "ipn": {
+      "0_html_consent_form_location": "consent_forms/consent_form_ipn.html",
+      "1a_individual_reimbursement": "yes",
+      "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde. Bei vorzeitigem Abbruch erhalten Sie eine anteilige Vergütung. Bitte setzen Sie sich hierzu mit dem Projektverantwortlichen der Studie in Kontakt.</p>",
+      "1b_individual_data_protection": "no",
+      "1b_individual_data_protection_text": null,
+      "1c_individual_complain": "no",
+      "1c_individual_complain_text": null,
+      "2_individual_completion_sentence": "yes",
+      "2_individual_completion_sentence_text": "Bitte klicken Sie diesen <a href='https://uni-kiel-psychologie.sona-systems.com/webstudy_credit.aspx?experiment_id=721&credit_token=911af3bb677140b7bf8c5172281cc291&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre VP-Stunde angerechnet zu bekommen.</p>"
+    },
     "bamberg": {
       "0_html_consent_form_location": "consent_forms/consent_form_bamberg.html",
       "1a_individual_reimbursement": "yes",
