@@ -364,5 +364,27 @@
 "1c_individual_complain_text": null,
 "2_individual_completion_sentence": "yes",
 "2_individual_completion_sentence_text":"</p><p>Bitte klicken Sie diesen <a href='https://uulm.sona-systems.com/webstudy_credit.aspx?experiment_id=1553&credit_token=fc4c094ec03647afb623482c4d569c73&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
+},
+"zurich": {
+  "0_html_consent_form_location": "consent_forms/consent_form_zurich.html",
+  "1a_individual_reimbursement": "yes",
+  "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Form eines 15-Franken-Gutscheines für Galaxus.</p>",
+  "1b_individual_data_protection": "no",
+  "1b_individual_data_protection_text": null,
+  "1c_individual_complain": "no",
+  "1c_individual_complain_text": null,
+  "2_individual_completion_sentence": "yes",
+  "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%TEILNAHMECODE%</strong>. Bitte senden Sie ihn an <a href='mailto:paedpsychlab@psych.uni-goettingen.de'>paedpsychlab@psych.uni-goettingen.de</a> mit dem Hinweis, dass sie an der 'Wort-Studie' teilgenommen haben.</p>"
+},
+"bielefeld": {
+  "0_html_consent_form_location": "consent_forms/consent_form_bielefeld.html",
+  "1a_individual_reimbursement": "yes",
+  "1a_individual_reimbursement_text": "<p>Die Teilnahme an dieser Studie is freiwillig</p>",
+  "1b_individual_data_protection": "no",
+  "1b_individual_data_protection_text": null,
+  "1c_individual_complain": "no",
+  "1c_individual_complain_text": null,
+  "2_individual_completion_sentence": "yes",
+  "2_individual_completion_sentence_text": "<p> Wir schätzen Ihre Unterstützung sehr. Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
 }
 }
