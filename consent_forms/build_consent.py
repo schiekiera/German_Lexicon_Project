@@ -386,7 +386,14 @@ def main(argv: Optional[list] = None) -> int:
     skipped_count = 0
 
     for site, site_cfg in mapping.items():
+        # Skip the default template entry
         if site.lower() == "default":
+            continue
+
+        # Do not overwrite consent forms that are maintained manually
+        if site.lower() in {"bielefeld", "zurich"}:
+            logger.info("Skipping site %s (manual consent form, not overwritten).", site)
+            skipped_count += 1
             continue
 
         # Build individualized content by applying conditional replacements
