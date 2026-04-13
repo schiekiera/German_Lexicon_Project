@@ -12,6 +12,8 @@ import re
 import sys
 from typing import Dict, Tuple, Optional
 
+# List of consent forms that are maintained manually and not overwritten by the build_consent.py script
+manual_consent_forms = {"bielefeld", "zurich", "bochum"}
 
 def configure_logging(verbose: bool) -> None:
     level = logging.DEBUG if verbose else logging.INFO
@@ -391,7 +393,7 @@ def main(argv: Optional[list] = None) -> int:
             continue
 
         # Do not overwrite consent forms that are maintained manually
-        if site.lower() in {"bielefeld", "zurich"}:
+        if site.lower() in manual_consent_forms:
             logger.info("Skipping site %s (manual consent form, not overwritten).", site)
             skipped_count += 1
             continue
@@ -421,9 +423,12 @@ def main(argv: Optional[list] = None) -> int:
             print(f"[Dry-run] Would generate: {site} -> {out_path}")
 
         generated_count += 1
-
+        
     print(f"Done. Generated: {generated_count}, Skipped: {skipped_count}.")
+    print(f"No consent forms were generated for the following sites: {manual_consent_forms}")
     return 0
+
+
 
 
 if __name__ == "__main__":
