@@ -419,5 +419,27 @@
 "1c_individual_complain_text": null,
 "2_individual_completion_sentence": "yes",
 "2_individual_completion_sentence_text": "<p><p>Klicken Sie auf diesen <a href='https://app.prolific.com/submissions/complete?cc=CO2LD3NR' target='_blank'>Link</a>, um Ihre Vergütung auf Prolific zu erhalten."
+},
+"lmu": {
+"0_html_consent_form_location": "consent_forms/consent_form_lmu.html",
+"1a_individual_reimbursement": "yes",
+"1a_individual_reimbursement_text": "<p>Wir schätzen Ihre Unterstützung sehr.</p>",
+"1b_individual_data_protection": "no",
+"1b_individual_data_protection_text": null,
+"1c_individual_complain": "no",
+"1c_individual_complain_text": null,
+"2_individual_completion_sentence": "yes",
+"2_individual_completion_sentence_text": "<p>Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
+},
+"passau": {
+"0_html_consent_form_location": "consent_forms/consent_form_passau.html",
+"1a_individual_reimbursement": "yes",
+"1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 11,00 € pro Stunde.</p>",
+"1b_individual_data_protection": "no",
+"1b_individual_data_protection_text": null,
+"1c_individual_complain": "no",
+"1c_individual_complain_text": null,
+"2_individual_completion_sentence": "yes",
+"2_individual_completion_sentence_text": "<p><p>Klicken Sie auf diesen <a href='L I N K' target='_blank'>Link</a>, um Ihre Vergütung zu erhalten."
 }
 }

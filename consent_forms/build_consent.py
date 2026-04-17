@@ -13,7 +13,7 @@ import sys
 from typing import Dict, Tuple, Optional
 
 # List of consent forms that are maintained manually and not overwritten by the build_consent.py script
-manual_consent_forms = {"bielefeld", "zurich", "bochum"}
+manual_consent_forms = {"bielefeld", "zurich", "lmu", "bochum"}
 
 def configure_logging(verbose: bool) -> None:
     level = logging.DEBUG if verbose else logging.INFO
