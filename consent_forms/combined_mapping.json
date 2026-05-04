@@ -374,7 +374,7 @@
   "1c_individual_complain": "no",
   "1c_individual_complain_text": null,
   "2_individual_completion_sentence": "yes",
-  "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%RANDOMCODE%</strong>. Bitte senden Sie ihn an <a href='mailto:paedpsychlab@psych.uni-goettingen.de'>paedpsychlab@psych.uni-goettingen.de</a> mit dem Hinweis, dass sie an der 'Wort-Studie' teilgenommen haben.</p>"
+  "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%RANDOMCODE%</strong>. Bitte senden Sie diesen Code per E‑Mail an <a href='mailto:lexiconstudy@kjpd.uzh.ch'>lexiconstudy@kjpd.uzh.ch</a> mit dem Hinweis, dass sie an der 'Wort-Studie' teilgenommen haben. Sie können hierfür eine beliebige E‑Mail‑Adresse verwenden. Nach Eingang des Codes senden wir Ihnen den digitalen Gutschein zu.</p>"
 },
 "bielefeld": {
   "0_html_consent_form_location": "consent_forms/consent_form_bielefeld.html",
