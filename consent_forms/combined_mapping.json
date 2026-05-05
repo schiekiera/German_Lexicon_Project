@@ -1,5 +1,5 @@
 {
-   "default": {
+  "default": {
     "0_html_consent_form_location": "consent_forms/consent_form_default.html",
     "1a_individual_reimbursement": "no",
     "1a_individual_reimbursement_text": null,
@@ -54,28 +54,28 @@
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='https://iuinternationalehochschule.sona-systems.com/webstudy_credit.aspx?experiment_id=369&credit_token=2d95217748f746ff940481c89a411108&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre VP-Stunde angerechnet zu bekommen.</p>"
   },
-    "ipn": {
-      "0_html_consent_form_location": "consent_forms/consent_form_ipn.html",
-      "1a_individual_reimbursement": "yes",
-      "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde. Bei vorzeitigem Abbruch erhalten Sie eine anteilige Vergütung. Bitte setzen Sie sich hierzu mit dem Projektverantwortlichen der Studie in Kontakt.</p>",
-      "1b_individual_data_protection": "no",
-      "1b_individual_data_protection_text": null,
-      "1c_individual_complain": "no",
-      "1c_individual_complain_text": null,
-      "2_individual_completion_sentence": "yes",
-      "2_individual_completion_sentence_text": "Bitte klicken Sie diesen <a href='https://uni-kiel-psychologie.sona-systems.com/webstudy_credit.aspx?experiment_id=721&credit_token=911af3bb677140b7bf8c5172281cc291&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre VP-Stunde angerechnet zu bekommen.</p>"
-    },
-    "bamberg": {
-      "0_html_consent_form_location": "consent_forms/consent_form_bamberg.html",
-      "1a_individual_reimbursement": "yes",
-      "1a_individual_reimbursement_text": "<p>Für die Vergabe einer VP-Stunde im STS schreiben Sie bitte eine Mail mit dem Keyword 'Sprache' an jascha.ruesseler@uni-bamberg.de</p>",
-      "1b_individual_data_protection": "no",
-      "1b_individual_data_protection_text": null,
-      "1c_individual_complain": "no",
-      "1c_individual_complain_text": null,
-      "2_individual_completion_sentence": "no",
-      "2_individual_completion_sentence_text": null
-    },
+  "ipn": {
+    "0_html_consent_form_location": "consent_forms/consent_form_ipn.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde. Bei vorzeitigem Abbruch erhalten Sie eine anteilige Vergütung. Bitte setzen Sie sich hierzu mit dem Projektverantwortlichen der Studie in Kontakt.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "Bitte klicken Sie diesen <a href='https://uni-kiel-psychologie.sona-systems.com/webstudy_credit.aspx?experiment_id=721&credit_token=911af3bb677140b7bf8c5172281cc291&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre VP-Stunde angerechnet zu bekommen.</p>"
+  },
+  "bamberg": {
+    "0_html_consent_form_location": "consent_forms/consent_form_bamberg.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Für die Vergabe einer VP-Stunde im STS schreiben Sie bitte eine Mail mit dem Keyword 'Sprache' an jascha.ruesseler@uni-bamberg.de</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "no",
+    "2_individual_completion_sentence_text": null
+  },
   "leipzig": {
     "0_html_consent_form_location": "consent_forms/consent_form_leipzig.html",
     "1a_individual_reimbursement": "yes",
@@ -87,7 +87,7 @@
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p><p>Bitte senden Sie diesen Code <strong> survey_code=XXXX </strong> zusammen mit Ihrem vollständigen Namen an <strong> kogexp@psychologie.uni-leipzig.de </strong> mit dem Betreff <strong> 'Vergütung German Lexicon Project'. </strong> Diese Informationen werden zur Quittierung Ihrer Aufwandsentschädigung verwendet und direkt danach gelöscht. Bitte denken Sie daran, Ihre Teilnahme von einem Mitarbeitenden der Arbeitsgruppe Kognitionspsychologie an Ihrer Universität quittieren zu lassen.</p>"
   },
-"goettingen": {
+  "goettingen": {
     "0_html_consent_form_location": "consent_forms/consent_form_goettingen.html",
     "1a_individual_reimbursement": "yes",
     "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 1 Versuchspersonenstunde.</p>",
@@ -97,7 +97,7 @@
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%TEILNAHMECODE%</strong>. Bitte senden Sie ihn an <a href='mailto:paedpsychlab@psych.uni-goettingen.de'>paedpsychlab@psych.uni-goettingen.de</a> mit dem Hinweis, dass sie an der 'Wort-Studie' teilgenommen haben.</p>"
-    },
+  },
   "dresden": {
     "0_html_consent_form_location": "consent_forms/consent_form_dresden.html",
     "1a_individual_reimbursement": "yes",
@@ -112,14 +112,14 @@
   "hildesheim": {
     "0_html_consent_form_location": "consent_forms/consent_form_hildesheim.html",
     "1a_individual_reimbursement": "yes",
-    "1a_individual_reimbursement_text":"<p>Für Ihre Teilnahme erhalten Sie eine Versuchspersonenstunde als Aufwandsentschädigung.</p>",
+    "1a_individual_reimbursement_text": "<p>Für Ihre Teilnahme erhalten Sie eine Versuchspersonenstunde als Aufwandsentschädigung.</p>",
     "1b_individual_data_protection": "no",
     "1b_individual_data_protection_text": null,
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p><p>Kontaktieren Sie bitte Frau Wächter unter kujannek@uni-hildesheim.de unter Nennung Ihres persönlichen Codeworts. Sie wird Ihnen dann den Nachweis für die Versuchspersonenstunde ausstellen. Ihr persönliches Codewort lautet: <strong> survey_code=XXXX </strong>.</p>"
-   },
+  },
   "fu": {
     "0_html_consent_form_location": "consent_forms/consent_form_fu.html",
     "1a_individual_reimbursement": "yes",
@@ -217,7 +217,7 @@
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text":  "<p>Bitte klicken Sie diesen <a href='S O N A L I N K' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
+    "2_individual_completion_sentence_text": "<p>Bitte klicken Sie diesen <a href='S O N A L I N K' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihren VP-Stundencode zu erhalten.</p>"
   },
   "ipu_prolific": {
     "0_html_consent_form_location": "consent_forms/consent_form_ipu_prolific.html",
@@ -230,7 +230,7 @@
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Klicken Sie auf diesen <a href='P R O L I F I C L I N K' target='_blank'>Link</a>, um Ihre Vergütung auf Prolific zu erhalten."
   },
-   "erfurt": {
+  "erfurt": {
     "0_html_consent_form_location": "consent_forms/consent_form_erfurt.html",
     "1a_individual_reimbursement": "yes",
     "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 1 VP-Stunde. Dafür müssen Sie auf den Abschluss-Link ganz am Ende der Studie klicken. Bei vorzeitigem Abbruch ist leider keine Aufwandsentschädigung möglich. Bei Problemen setzen Sie sich bitte mit den Projektverantwortlichen der Studie in Kontakt.</p>",
@@ -250,20 +250,19 @@
     "1c_individual_complain": "no",
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
-    "2_individual_completion_sentence_text":"<p></p><p>Bitte klicken Sie diesen <a href='https://app.prolific.com/submissions/complete?cc=C1386N6O' target='_blank'>Link</a>, und Ihre Aufwandsentschädigung zu erhalten.</p>"
+    "2_individual_completion_sentence_text": "<p></p><p>Bitte klicken Sie diesen <a href='https://app.prolific.com/submissions/complete?cc=C1386N6O' target='_blank'>Link</a>, und Ihre Aufwandsentschädigung zu erhalten.</p>"
   },
-"potsdam_sona": {
-"0_html_consent_form_location": "consent_forms/consent_form_potsdam_sona.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text":"</p><p>Bitte klicken Sie diesen <a href='https://uni-potsdam.sona-systems.com/webstudy_credit.aspx?experiment_id=1624&credit_token=83e3ef38cb3043d78e9142cec928d9bb&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
-},
-    
+  "potsdam_sona": {
+    "0_html_consent_form_location": "consent_forms/consent_form_potsdam_sona.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "</p><p>Bitte klicken Sie diesen <a href='https://uni-potsdam.sona-systems.com/webstudy_credit.aspx?experiment_id=1624&credit_token=83e3ef38cb3043d78e9142cec928d9bb&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
+  },
   "mannheim_kognitive_psychologie": {
     "0_html_consent_form_location": "consent_forms/consent_form_mannheim_kognitive_psychologie.html",
     "1a_individual_reimbursement": "yes",
@@ -296,7 +295,6 @@
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Klicken Sie auf diesen <a href='https://uni-frankfurt.sona-systems.com/webstudy_credit.aspx?experiment_id=1076&credit_token=3fc48a0fed924033922a4cf669580aba&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Versuchspersonenminuten (VPM) zu erhalten."
-
   },
   "frankfurt_prolific": {
     "0_html_consent_form_location": "consent_forms/consent_form_frankfurt_prolific.html",
@@ -308,8 +306,7 @@
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p><p>Klicken Sie auf diesen <a href='https://app.prolific.com/submissions/complete?cc=CO2LD3NR' target='_blank'>Link</a>, um Ihre Vergütung auf Prolific zu erhalten."
-  }
-  ,
+  },
   "koeln": {
     "0_html_consent_form_location": "consent_forms/consent_form_koeln.html",
     "1a_individual_reimbursement": "no",
@@ -320,7 +317,7 @@
     "1c_individual_complain_text": null,
     "2_individual_completion_sentence": "yes",
     "2_individual_completion_sentence_text": "<p>Klicken Sie auf diesen <a href='https://www.psytoolkit.org/c/3.6.5/survey?s=af7yG' target='_blank'>Link</a>, um Ihre Vergütung zu erhalten."
-  }, 
+  },
   "hagen": {
     "0_html_consent_form_location": "consent_forms/consent_form_hagen.html",
     "1a_individual_reimbursement": "yes",
@@ -344,102 +341,102 @@
     "2_individual_completion_sentence_text": "Bitte geben Sie der Versuchsleitung Bescheid."
   },
   "potsdam_sona_cogscience": {
-"0_html_consent_form_location": "consent_forms/consent_form_potsdam_sona_cogscience.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text":"</p><p>Bitte klicken Sie diesen <a href='https://uni-potsdam.sona-systems.com/webstudy_credit.aspx?experiment_id=1634&credit_token=e1fbf7ebad0341afb21d5be6e1ac9b82&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
-},
+    "0_html_consent_form_location": "consent_forms/consent_form_potsdam_sona_cogscience.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "</p><p>Bitte klicken Sie diesen <a href='https://uni-potsdam.sona-systems.com/webstudy_credit.aspx?experiment_id=1634&credit_token=e1fbf7ebad0341afb21d5be6e1ac9b82&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
+  },
   "ulm": {
-"0_html_consent_form_location": "consent_forms/consent_form_ulm.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text":"</p><p>Bitte klicken Sie diesen <a href='https://uulm.sona-systems.com/webstudy_credit.aspx?experiment_id=1553&credit_token=fc4c094ec03647afb623482c4d569c73&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
-},
-"zurich": {
-  "0_html_consent_form_location": "consent_forms/consent_form_zurich.html",
-  "1a_individual_reimbursement": "yes",
-  "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Form eines 15-Franken-Gutscheines für Galaxus.</p>",
-  "1b_individual_data_protection": "no",
-  "1b_individual_data_protection_text": null,
-  "1c_individual_complain": "no",
-  "1c_individual_complain_text": null,
-  "2_individual_completion_sentence": "yes",
-  "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%RANDOMCODE%</strong>. Bitte senden Sie diesen Code per E‑Mail an <a href='mailto:lexiconstudy@kjpd.uzh.ch'>lexiconstudy@kjpd.uzh.ch</a> mit dem Hinweis, dass sie an der 'Wort-Studie' teilgenommen haben. Sie können hierfür eine beliebige E‑Mail‑Adresse verwenden. Nach Eingang des Codes senden wir Ihnen den digitalen Gutschein zu.</p>"
-},
-"bielefeld": {
-  "0_html_consent_form_location": "consent_forms/consent_form_bielefeld.html",
-  "1a_individual_reimbursement": "yes",
-  "1a_individual_reimbursement_text": "<p>Wir schätzen Ihre Unterstützung sehr.</p>",
-  "1b_individual_data_protection": "no",
-  "1b_individual_data_protection_text": null,
-  "1c_individual_complain": "no",
-  "1c_individual_complain_text": null,
-  "2_individual_completion_sentence": "yes",
-  "2_individual_completion_sentence_text": "<p>Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
-},
+    "0_html_consent_form_location": "consent_forms/consent_form_ulm.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "</p><p>Bitte klicken Sie diesen <a href='https://uulm.sona-systems.com/webstudy_credit.aspx?experiment_id=1553&credit_token=fc4c094ec03647afb623482c4d569c73&survey_code=XXXX' target='_blank'>Link</a>, um Ihre Teilnahme abzuschließen und Ihre Aufwandsentschädigung zu erhalten.</p>"
+  },
+  "zurich": {
+    "0_html_consent_form_location": "consent_forms/consent_form_zurich.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Form eines 15-Franken-Gutscheines für Galaxus.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p> Ihr Teilnahmecode ist <strong>%RANDOMCODE%</strong>. Bitte senden Sie diesen Code per E‑Mail an <a href='mailto:lexiconstudy@kjpd.uzh.ch'>lexiconstudy@kjpd.uzh.ch</a> mit dem Hinweis, dass sie an der 'Wort-Studie' teilgenommen haben. Sie können hierfür eine beliebige E‑Mail‑Adresse verwenden. Nach Eingang des Codes senden wir Ihnen den digitalen Gutschein zu.</p>"
+  },
+  "bielefeld": {
+    "0_html_consent_form_location": "consent_forms/consent_form_bielefeld.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Wir schätzen Ihre Unterstützung sehr.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
+  },
   "graz": {
-"0_html_consent_form_location": "consent_forms/consent_form_graz.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde gutgeschrieben.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text": "<p>Ihr persönlicher Code lautet: <strong>survey_code=XXXX</strong>. </p><p> Bitte teilen Sie diesen Code der Versuchsleitung mit.</p>"
-},
+    "0_html_consent_form_location": "consent_forms/consent_form_graz.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Versuchspersonenstunde gutgeschrieben.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Ihr persönlicher Code lautet: <strong>survey_code=XXXX</strong>. </p><p> Bitte teilen Sie diesen Code der Versuchsleitung mit.</p>"
+  },
   "bochum": {
-"0_html_consent_form_location": "consent_forms/consent_form_bochum.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Wir schätzen Ihre Unterstützung sehr.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text": "<p>Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
-},
-"bochum_prolific": {
-"0_html_consent_form_location": "consent_forms/consent_form_bochum_prolific.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 11,00 € pro Stunde.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text": "<p><p>Klicken Sie auf diesen <a href='https://app.prolific.com/submissions/complete?cc=CO2LD3NR' target='_blank'>Link</a>, um Ihre Vergütung auf Prolific zu erhalten."
-},
-"lmu": {
-"0_html_consent_form_location": "consent_forms/consent_form_lmu.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Wir schätzen Ihre Unterstützung sehr.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text": "<p>Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
-},
-"passau": {
-"0_html_consent_form_location": "consent_forms/consent_form_passau.html",
-"1a_individual_reimbursement": "yes",
-"1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 11,00 € pro Stunde.</p>",
-"1b_individual_data_protection": "no",
-"1b_individual_data_protection_text": null,
-"1c_individual_complain": "no",
-"1c_individual_complain_text": null,
-"2_individual_completion_sentence": "yes",
-"2_individual_completion_sentence_text": "<p><p>Klicken Sie auf diesen <a href='L I N K' target='_blank'>Link</a>, um Ihre Vergütung zu erhalten."
-}
+    "0_html_consent_form_location": "consent_forms/consent_form_bochum.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Wir schätzen Ihre Unterstützung sehr.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
+  },
+  "bochum_prolific": {
+    "0_html_consent_form_location": "consent_forms/consent_form_bochum_prolific.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 9,00 £ Stunde auf Prolific.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p><p>Klicken Sie auf diesen <a href='https://app.prolific.com/submissions/complete?cc=CT5M7Y89' target='_blank'>Link</a>, um Ihre Vergütung auf Prolific zu erhalten."
+  },
+  "lmu": {
+    "0_html_consent_form_location": "consent_forms/consent_form_lmu.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Wir schätzen Ihre Unterstützung sehr.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p>Sie leisten damit einen wichtigen Beitrag für unsere Forschung.</p>"
+  },
+  "passau": {
+    "0_html_consent_form_location": "consent_forms/consent_form_passau.html",
+    "1a_individual_reimbursement": "yes",
+    "1a_individual_reimbursement_text": "<p>Sie erhalten für Ihre Teilnahme eine Aufwandsentschädigung in Höhe von 11,00 € pro Stunde.</p>",
+    "1b_individual_data_protection": "no",
+    "1b_individual_data_protection_text": null,
+    "1c_individual_complain": "no",
+    "1c_individual_complain_text": null,
+    "2_individual_completion_sentence": "yes",
+    "2_individual_completion_sentence_text": "<p><p>Klicken Sie auf diesen <a href='L I N K' target='_blank'>Link</a>, um Ihre Vergütung zu erhalten."
+  }
 }
